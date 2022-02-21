@@ -7,10 +7,6 @@ import { useStateContext } from "../../context/States";
 import { useProfessional } from "../../context/Professional";
 import { useAppointment } from "../../context/Appointments";
 
-//isProf
-//isAdm
-//or fulero
-
 export const NavBar = () => {
   const { user } = useAuth();
   const { setAllProfessinals, setAllAppointments } = useStateContext();
