@@ -14,6 +14,7 @@ export const AllProfessionals = () => {
 
   return (
     <>
+      <h1>Medicos</h1>
       <ContainerProfessionals>
         {modalAppointment ? <FormAppointments /> : <></>}
         {allProfessional &&

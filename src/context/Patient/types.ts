@@ -6,14 +6,14 @@ export interface PatientProviderProps {
   children: ReactNode;
 }
 
-export interface UserProps {
-  age: number;
-  cpf: string;
-  email: string;
-  gender: string;
-  health_insurance: string;
-  name: string;
-  phone: string;
+export interface PatientProps {
+  age?: number;
+  cpf?: string;
+  email?: string;
+  gender?: string;
+  health_insurance?: string;
+  name?: string;
+  phone?: string;
 }
 
 export interface PatientProviderData {

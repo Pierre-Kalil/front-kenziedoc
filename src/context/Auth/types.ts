@@ -1,7 +1,8 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import { LoginProps } from "../../components/formLogin/types";
 import { NavigateFunction } from "react-router-dom";
-import { UserProps } from "../Patient/types";
+import { PatientProps } from "../Patient/types";
+import { ProfessionalProps } from "../Professional/types";
 
 export interface AuthProviderProps {
   children: ReactNode;
@@ -11,8 +12,8 @@ export interface AuthProviderData {
   signin: (data: LoginProps, navigate: NavigateFunction) => Promise<void>;
   identifyUser: any;
   token: string;
-  user: UserProps;
-  setUser: Dispatch<SetStateAction<UserProps>>;
+  user: PatientProps | ProfessionalProps;
+  setUser: Dispatch<SetStateAction<PatientProps | ProfessionalProps>>;
 }
 
 export interface Decoded {
@@ -33,6 +34,7 @@ export interface Decoded {
     council_number: string;
     speciality: string;
     permission: string;
+    isAdm: boolean;
   };
 }
 

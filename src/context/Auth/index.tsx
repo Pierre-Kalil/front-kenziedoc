@@ -3,17 +3,20 @@ import { NavigateFunction } from "react-router";
 import api from "../../services/api";
 import { AuthProviderProps, Decoded, AuthProviderData } from "./types";
 import { LoginProps } from "../../components/formLogin/types";
-import { UserProps } from "../Patient/types";
+import { PatientProps } from "../Patient/types";
 import { useProfessional } from "../Professional";
 import { usePatient } from "../Patient";
 import jwt_decode from "jwt-decode";
+import { ProfessionalProps } from "../Professional/types";
 
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const { FilterByPatient } = usePatient();
   const { FilterByProfessional } = useProfessional();
-  const [user, setUser] = useState<UserProps>({} as UserProps);
+  const [user, setUser] = useState<PatientProps | ProfessionalProps>(
+    {} as PatientProps | ProfessionalProps
+  );
   const [token, setToken] = useState(
     localStorage.getItem("@kenzieDoc:token") || ""
   );
@@ -25,7 +28,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     await api
       .post("/login", data)
       .then((res) => {
-        console.log(res);
         localStorage.clear();
         localStorage.setItem("@kenzieDoc:token", res.data.token);
         setToken(res.data.token);
@@ -36,9 +38,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           JSON.stringify(decoded.sub.cpf)
         );
         navigate("/dashboard");
-        FilterByProfessional(
-          JSON.parse(localStorage.getItem("@kenzieDoc:userBy") || "")
-        );
+
         // localStorage.setItem(
         //   "@kenzieDoc:userIdentify",
         //   JSON.stringify(decoded.sub.permission)
@@ -65,6 +65,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       })
       .catch((err) => console.log(err, "erro"));
   };
+  console.log(user);
   return (
     <AuthContext.Provider
       value={{ signin, identifyUser, token, user, setUser }}

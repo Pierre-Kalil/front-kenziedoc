@@ -20,6 +20,11 @@ export const NavBar = () => {
     setAllAppointments(true);
   };
 
+  const handleProfessional = () => {
+    setAllAppointments(false);
+    setAllProfessinals(true);
+  };
+
   return (
     <ContainerNavBar>
       <div className="boxnav">
@@ -33,7 +38,7 @@ export const NavBar = () => {
               </button>
             </li>
             <li>
-              <button>
+              <button onClick={handleProfessional}>
                 <FaBookMedical />
                 <span className="title">Médicos</span>
               </button>
