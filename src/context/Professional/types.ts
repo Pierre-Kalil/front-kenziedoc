@@ -6,13 +6,13 @@ export interface ProfessionalProviderProps {
 }
 
 export interface ProfessionalProps {
-  council_number: string;
-  name: string;
-  email: string;
-  phone: string;
-  password: string;
-  specialty: string;
-  address: string;
+  council_number?: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  password?: string;
+  specialty?: string;
+  address?: string;
 }
 
 export interface ProfessionalDataProps {
