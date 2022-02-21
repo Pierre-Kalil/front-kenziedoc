@@ -13,7 +13,7 @@ const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const { FilterByPatient } = usePatient();
   const { FilterByProfessional } = useProfessional();
-  const [user, setUser] = useState<[]>([]);
+  const [user, setUser] = useState<UserProps>({} as UserProps);
   const [token, setToken] = useState(
     localStorage.getItem("@kenzieDoc:token") || ""
   );

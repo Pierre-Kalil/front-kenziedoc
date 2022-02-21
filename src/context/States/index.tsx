@@ -5,7 +5,7 @@ const StatesContext = createContext<ContextStates>({} as ContextStates);
 
 export const StatesProvider = ({ children }: ProviderStates) => {
   const [modalAppointment, setModalAppointment] = useState<boolean>(false);
-  const [apointments, setAppointments] = useState<boolean>(false);
+  const [allApointments, setAllAppointments] = useState<boolean>(false);
   const [allProfessinals, setAllProfessinals] = useState<boolean>(false);
 
   return (
@@ -13,8 +13,8 @@ export const StatesProvider = ({ children }: ProviderStates) => {
       value={{
         setModalAppointment,
         modalAppointment,
-        setAppointments,
-        apointments,
+        setAllAppointments,
+        allApointments,
         setAllProfessinals,
         allProfessinals,
       }}

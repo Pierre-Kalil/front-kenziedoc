@@ -11,8 +11,8 @@ export interface AuthProviderData {
   signin: (data: LoginProps, navigate: NavigateFunction) => Promise<void>;
   identifyUser: any;
   token: string;
-  user: UserProps[];
-  setUser: Dispatch<SetStateAction<[]>>;
+  user: UserProps;
+  setUser: Dispatch<SetStateAction<UserProps>>;
 }
 
 export interface Decoded {

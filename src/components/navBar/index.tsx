@@ -5,6 +5,7 @@ import { useAuth } from "../../context/Auth";
 import { ContainerNavBar } from "./style";
 import { useStateContext } from "../../context/States";
 import { useProfessional } from "../../context/Professional";
+import { useAppointment } from "../../context/Appointments";
 
 //isProf
 //isAdm
@@ -12,17 +13,17 @@ import { useProfessional } from "../../context/Professional";
 
 export const NavBar = () => {
   const { user } = useAuth();
-  const { setAppointments, setAllProfessinals } = useStateContext();
+  const { setAllProfessinals, setAllAppointments } = useStateContext();
 
   const handleAppointment = () => {
     setAllProfessinals(false);
-    setAppointments(true);
+    setAllAppointments(true);
   };
 
   return (
     <ContainerNavBar>
       <div className="boxnav">
-        <h1>{user && user.map((item) => item.name)}</h1>
+        <h1>{user && user.name}</h1>
         <nav className="nav">
           <ul>
             <li>

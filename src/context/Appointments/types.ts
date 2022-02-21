@@ -7,6 +7,6 @@ export interface AppointmentsContextProps {
 
 export interface AppointmentsProviderProps {
   appointments: AppointmentsFormProps[];
-  // setAppointments: React.Dispatch<React.SetStateAction<AppointmentsFormProps>>;
+  // setAppointments: React.Dispatch<React.SetStateAction<AppointmentsFormProps[]>>;
   createAppointments: (newdata: AppointmentsFormProps) => void;
 }

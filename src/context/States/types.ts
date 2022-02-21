@@ -7,8 +7,8 @@ export interface ProviderStates {
 export interface ContextStates {
   setModalAppointment: Dispatch<React.SetStateAction<boolean>>;
   modalAppointment: boolean;
-  setAppointments: Dispatch<React.SetStateAction<boolean>>;
-  apointments: boolean;
+  setAllAppointments: Dispatch<React.SetStateAction<boolean>>;
+  allApointments: boolean;
   setAllProfessinals: Dispatch<React.SetStateAction<boolean>>;
   allProfessinals: boolean;
 }

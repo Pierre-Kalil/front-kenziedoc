@@ -11,14 +11,16 @@ import { useStateContext } from "../../context/States";
 //or fulero
 
 export const Dashboard = () => {
-  const { apointments, allProfessinals } = useStateContext();
+  const { allProfessinals, allApointments } = useStateContext();
 
   return (
     <ContainerMain>
       <NavBar />
       <ContainerOutlet>
+        {/* Patients */}
         {allProfessinals ? <AllProfessionals /> : <></>}
-        {/* { ? <AllPatients /> : <></>} */}
+        {/* {allApointments ? <AllAppointments /> : <></> } */}
+
         <Outlet />
       </ContainerOutlet>
     </ContainerMain>
