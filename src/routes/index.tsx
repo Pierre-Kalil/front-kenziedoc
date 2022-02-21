@@ -1,8 +1,5 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { DashboardPatient } from "../pages/dashboardPatient";
-import { DashboardProfessional } from "../pages/dashboardProfessional";
-import { DashboardSecretary } from "../pages/dashboardSecretary";
+import { Dashboard } from "../pages/dashboard";
 import { Home } from "../pages/home";
 import { Login } from "../pages/Login";
 import { RegisterMain } from "../pages/registerMain";
@@ -15,15 +12,9 @@ export default function MainRoutes() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/dashboardpatient" element={<DashboardPatient />} />
-      <Route
-        path="/dashboardprofessional"
-        element={<DashboardProfessional />}
-      />
-      <Route path="/dashboardadmin" element={<DashboardSecretary />} />
+      <Route path="/dashboard" element={<Dashboard />} />
 
       <Route path="/registermain" element={<RegisterMain />} />
-
       <Route path="registerpatient" element={<RegisterPatient />} />
       <Route path="registerprofessional" element={<RegisterProfessional />} />
       <Route path="registersecretary" element={<RegisterSecretary />} />

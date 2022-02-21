@@ -6,6 +6,7 @@ const StatesContext = createContext<ContextStates>({} as ContextStates);
 export const StatesProvider = ({ children }: ProviderStates) => {
   const [modalAppointment, setModalAppointment] = useState<boolean>(false);
   const [apointments, setAppointments] = useState<boolean>(false);
+  const [allProfessinals, setAllProfessinals] = useState<boolean>(false);
 
   return (
     <StatesContext.Provider
@@ -14,6 +15,8 @@ export const StatesProvider = ({ children }: ProviderStates) => {
         modalAppointment,
         setAppointments,
         apointments,
+        setAllProfessinals,
+        allProfessinals,
       }}
     >
       {children}

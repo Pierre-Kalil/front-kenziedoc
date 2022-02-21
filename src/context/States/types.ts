@@ -9,4 +9,6 @@ export interface ContextStates {
   modalAppointment: boolean;
   setAppointments: Dispatch<React.SetStateAction<boolean>>;
   apointments: boolean;
+  setAllProfessinals: Dispatch<React.SetStateAction<boolean>>;
+  allProfessinals: boolean;
 }

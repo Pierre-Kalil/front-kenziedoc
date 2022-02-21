@@ -6,15 +6,16 @@ import { ContainerNavBar } from "./style";
 import { useStateContext } from "../../context/States";
 import { useProfessional } from "../../context/Professional";
 
+//isProf
+//isAdm
+//or fulero
+
 export const NavBar = () => {
-  const { user, identifyUser } = useAuth();
-  const { setAppointments } = useStateContext();
+  const { user } = useAuth();
+  const { setAppointments, setAllProfessinals } = useStateContext();
 
   const handleAppointment = () => {
-    setAppointments(true);
-  };
-
-  const handleProfessional = () => {
+    setAllProfessinals(false);
     setAppointments(true);
   };
 

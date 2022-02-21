@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           "@kenzieDoc:userBy",
           JSON.stringify(decoded.sub.cpf)
         );
-        navigate("/dashboardpatient");
+        navigate("/dashboard");
         FilterByProfessional(
           JSON.parse(localStorage.getItem("@kenzieDoc:userBy") || "")
         );
