@@ -12,4 +12,8 @@ export interface ContextStates {
   setAllProfessinals: Dispatch<React.SetStateAction<boolean>>;
   allProfessinals: boolean;
   userType: string;
+  setAllPatients: Dispatch<React.SetStateAction<boolean>>;
+  allPatients: boolean;
+  setHome: Dispatch<React.SetStateAction<boolean>>;
+  home: boolean;
 }

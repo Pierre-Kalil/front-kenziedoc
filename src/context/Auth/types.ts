@@ -11,8 +11,6 @@ export interface AuthProviderProps {
 export interface AuthProviderData {
   signin: (data: LoginProps, navigate: NavigateFunction) => Promise<void>;
   token: string;
-  user: PatientProps | ProfessionalProps;
-  setUser: Dispatch<SetStateAction<PatientProps | ProfessionalProps>>;
 }
 
 export interface Decoded {
