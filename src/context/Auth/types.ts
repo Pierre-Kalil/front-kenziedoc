@@ -1,8 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import { LoginProps } from "../../components/formLogin/types";
 import { NavigateFunction } from "react-router-dom";
-import { PatientProps } from "../Patient/types";
-import { ProfessionalProps } from "../Professional/types";
 
 export interface AuthProviderProps {
   children: ReactNode;
