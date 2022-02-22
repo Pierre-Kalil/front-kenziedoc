@@ -3,16 +3,11 @@ import { NavigateFunction } from "react-router";
 import api from "../../services/api";
 import { AuthProviderProps, Decoded, AuthProviderData } from "./types";
 import { LoginProps } from "../../components/formLogin/types";
-import { PatientProps } from "../Patient/types";
 import jwt_decode from "jwt-decode";
-import { ProfessionalProps } from "../Professional/types";
 
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<PatientProps | ProfessionalProps>(
-    {} as PatientProps | ProfessionalProps
-  );
   const [token, setToken] = useState(
     localStorage.getItem("@kenzieDoc:token") || ""
   );
@@ -27,19 +22,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
         const decoded = jwt_decode<Decoded>(token);
 
+        navigate("/dashboard");
         localStorage.setItem(
           "@kenzieDoc:userBy",
-          JSON.stringify(
-            decoded.cpf || decoded.council_number || decoded.isAdm == true
-          )
+          JSON.stringify(decoded.cpf || decoded.council_number || decoded.isAdm)
         );
-        navigate("/dashboard");
       })
       .catch((err) => console.log(err, "erro"));
   };
-  console.log(user);
   return (
-    <AuthContext.Provider value={{ signin, token, user, setUser }}>
+    <AuthContext.Provider value={{ signin, token }}>
       {children}
     </AuthContext.Provider>
   );

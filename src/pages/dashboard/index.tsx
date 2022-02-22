@@ -4,9 +4,10 @@ import { ContainerMain, ContainerOutlet } from "./style";
 import { AllProfessionals } from "../allProfessionals";
 import { AllAppointments } from "../allAppointments";
 import { useStateContext } from "../../context/States";
+import { AllPatients } from "../allPatients";
 
 export const Dashboard = () => {
-  const { allProfessinals, allApointments } = useStateContext();
+  const { allProfessinals, allApointments, allPatients } = useStateContext();
 
   return (
     <ContainerMain>
@@ -14,6 +15,7 @@ export const Dashboard = () => {
       <ContainerOutlet>
         {allProfessinals ? <AllProfessionals /> : <></>}
         {allApointments ? <AllAppointments /> : <></>}
+        {allPatients ? <AllPatients /> : <></>}
         <Outlet />
       </ContainerOutlet>
     </ContainerMain>

@@ -7,10 +7,11 @@ export const StatesProvider = ({ children }: ProviderStates) => {
   const [modalAppointment, setModalAppointment] = useState<boolean>(false);
   const [allApointments, setAllAppointments] = useState<boolean>(false);
   const [allProfessinals, setAllProfessinals] = useState<boolean>(false);
-  const [userType, setUserType] = useState(
-    JSON.stringify(localStorage.getItem("@kenzieDoc:userBy"))
+  const [allPatients, setAllPatients] = useState<boolean>(false);
+  const [home, setHome] = useState<boolean>(false);
+  const [userType, setUserType] = useState<string>(
+    localStorage.getItem("@kenzieDoc:userBy") || ""
   );
-  console.log(userType);
 
   return (
     <StatesContext.Provider
@@ -21,6 +22,11 @@ export const StatesProvider = ({ children }: ProviderStates) => {
         allApointments,
         setAllProfessinals,
         allProfessinals,
+        userType,
+        setAllPatients,
+        allPatients,
+        setHome,
+        home,
       }}
     >
       {children}
