@@ -11,7 +11,7 @@ const PatientContext = createContext<PatientProviderData>(
 );
 
 export const PatientProvider = ({ children }: PatientProviderProps) => {
-  const { token, user, setUser, identifyUser } = useAuth();
+  const { token, user, setUser } = useAuth();
   const [allPatient, setAllPatient] = useState<[]>([]);
   const navigate = useNavigate();
 

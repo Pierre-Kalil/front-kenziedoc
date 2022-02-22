@@ -1,21 +1,19 @@
 import { Outlet } from "react-router-dom";
-import { ContainerMain, ContainerOutlet } from "./style";
 import { NavBar } from "../../components/navBar";
+import { ContainerMain, ContainerOutlet } from "./style";
 import { AllProfessionals } from "../allProfessionals";
+import { AllAppointments } from "../allAppointments";
 import { useStateContext } from "../../context/States";
 
-export const DashboardPatient = () => {
-  const { apointments } = useStateContext();
+export const Dashboard = () => {
+  const { allProfessinals, allApointments } = useStateContext();
 
   return (
     <ContainerMain>
       <NavBar />
       <ContainerOutlet>
-        {/* {allProfessional &&
-          allProfessional.map((item, index) => (
-            <div key={index}>{item.name}</div>
-          ))} */}
-        {apointments ? <AllProfessionals /> : <></>}
+        {allProfessinals ? <AllProfessionals /> : <></>}
+        {allApointments ? <AllAppointments /> : <></>}
         <Outlet />
       </ContainerOutlet>
     </ContainerMain>
