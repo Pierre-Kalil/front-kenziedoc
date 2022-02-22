@@ -9,6 +9,8 @@ export interface ContextStates {
   modalAppointment: boolean;
   setAllAppointments: Dispatch<React.SetStateAction<boolean>>;
   allApointments: boolean;
-  setAllProfessinals: Dispatch<React.SetStateAction<boolean>>;
-  allProfessinals: boolean;
+  setAllProfessionals: Dispatch<React.SetStateAction<boolean>>;
+  allProfessionals: boolean;
+  setLogout: Dispatch<React.SetStateAction<boolean>>;
+  logout: boolean;
 }

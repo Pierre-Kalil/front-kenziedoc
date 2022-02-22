@@ -6,7 +6,8 @@ const StatesContext = createContext<ContextStates>({} as ContextStates);
 export const StatesProvider = ({ children }: ProviderStates) => {
   const [modalAppointment, setModalAppointment] = useState<boolean>(false);
   const [allApointments, setAllAppointments] = useState<boolean>(false);
-  const [allProfessinals, setAllProfessinals] = useState<boolean>(false);
+  const [allProfessionals, setAllProfessionals] = useState<boolean>(false);
+  const [logout, setLogout] = useState<boolean>(false);
   const [userType, setUserType] = useState(
     JSON.stringify(localStorage.getItem("@kenzieDoc:userBy"))
   );
@@ -19,8 +20,10 @@ export const StatesProvider = ({ children }: ProviderStates) => {
         modalAppointment,
         setAllAppointments,
         allApointments,
-        setAllProfessinals,
-        allProfessinals,
+        setAllProfessionals,
+        allProfessionals,
+        setLogout,
+        logout,
       }}
     >
       {children}

@@ -9,16 +9,16 @@ import { useAppointment } from "../../context/Appointments";
 
 export const NavBar = () => {
   const { user } = useAuth();
-  const { setAllProfessinals, setAllAppointments } = useStateContext();
+  const { setAllProfessionals, setAllAppointments } = useStateContext();
 
   const handleAppointment = () => {
-    setAllProfessinals(false);
+    setAllProfessionals(false);
     setAllAppointments(true);
   };
 
   const handleProfessional = () => {
     setAllAppointments(false);
-    setAllProfessinals(true);
+    setAllProfessionals(true);
   };
 
   return (
