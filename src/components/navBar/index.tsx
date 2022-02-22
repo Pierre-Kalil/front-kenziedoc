@@ -1,15 +1,14 @@
-import { useState } from "react";
 import { FaBookMedical, FaRegCalendarAlt, FaHome } from "react-icons/fa";
 import { BiExit } from "react-icons/bi";
+import { BsPeopleFill } from "react-icons/bs";
 import { useAuth } from "../../context/Auth";
 import { ContainerNavBar } from "./style";
 import { useStateContext } from "../../context/States";
-import { useProfessional } from "../../context/Professional";
-import { useAppointment } from "../../context/Appointments";
 
 export const NavBar = () => {
   const { user } = useAuth();
-  const { setAllProfessinals, setAllAppointments } = useStateContext();
+  const { setAllProfessinals, setAllAppointments, userType } =
+    useStateContext();
 
   const handleAppointment = () => {
     setAllProfessinals(false);
@@ -21,6 +20,9 @@ export const NavBar = () => {
     setAllProfessinals(true);
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+  };
   return (
     <ContainerNavBar>
       <div className="boxnav">
@@ -33,20 +35,43 @@ export const NavBar = () => {
                 <span className="title">Home</span>
               </button>
             </li>
+            {userType.length === 11 || userType ? (
+              <li>
+                <button onClick={handleProfessional}>
+                  <FaBookMedical />
+                  <span className="title">Médicos</span>
+                </button>
+              </li>
+            ) : (
+              <></>
+            )}
+            {userType ? (
+              <li>
+                <button>
+                  <BsPeopleFill />
+                  <span className="title">Pacientes</span>
+                </button>
+              </li>
+            ) : (
+              <></>
+            )}
+            {userType ? (
+              <li>
+                <button>
+                  <FaRegCalendarAlt />
+                  <span className="title">Consultas</span>
+                </button>
+              </li>
+            ) : (
+              <li>
+                <button onClick={handleAppointment}>
+                  <FaRegCalendarAlt />
+                  <span className="title">Minhas Consultas</span>
+                </button>
+              </li>
+            )}
             <li>
-              <button onClick={handleProfessional}>
-                <FaBookMedical />
-                <span className="title">Médicos</span>
-              </button>
-            </li>
-            <li>
-              <button onClick={handleAppointment}>
-                <FaRegCalendarAlt />
-                <span className="title">Minhas Consultas</span>
-              </button>
-            </li>
-            <li>
-              <button>
+              <button onClick={handleLogout}>
                 <BiExit />
                 <span className="title">Sair</span>
               </button>

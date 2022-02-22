@@ -29,15 +29,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
         localStorage.setItem(
           "@kenzieDoc:userBy",
-          JSON.stringify(
-            decoded.cpf || decoded.council_number || decoded.isAdm == true
-          )
+          JSON.stringify(decoded.cpf || decoded.council_number || decoded.isAdm)
         );
         navigate("/dashboard");
       })
       .catch((err) => console.log(err, "erro"));
   };
-  console.log(user);
   return (
     <AuthContext.Provider value={{ signin, token, user, setUser }}>
       {children}

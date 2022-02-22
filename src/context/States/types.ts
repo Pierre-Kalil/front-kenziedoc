@@ -11,4 +11,5 @@ export interface ContextStates {
   allApointments: boolean;
   setAllProfessinals: Dispatch<React.SetStateAction<boolean>>;
   allProfessinals: boolean;
+  userType: string;
 }
