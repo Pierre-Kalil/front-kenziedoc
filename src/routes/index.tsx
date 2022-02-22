@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { Dashboard } from "../pages/Dashboard";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
@@ -10,6 +10,7 @@ import { RegisterSecretary } from "../pages/RegisterSecretary";
 export default function MainRoutes() {
   return (
     <Routes>
+      <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/registermain" element={<RegisterMain />} />
