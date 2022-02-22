@@ -6,18 +6,20 @@ export interface PatientProviderProps {
   children: ReactNode;
 }
 
-export interface PatientProps {
-  age?: number;
-  cpf?: string;
-  email?: string;
-  gender?: string;
-  health_insurance?: string;
-  name?: string;
-  phone?: string;
+export interface UserProps {
+  age: number;
+  cpf: string;
+  email: string;
+  sex: string;
+  health_plan: string;
+  name: string;
+  phone: string;
 }
 
 export interface PatientProviderData {
   allPatient: [];
-  CreatePatient: (data: PatientFormProps, navigate: NavigateFunction) => void;
-  FilterByPatient: (identify: string) => void;
+  createPatient: (data: PatientFormProps, navigate: NavigateFunction) => void;
+  listAllPatients: () => void;
+  updatePatient: (cpf: string, data: any) => void;
+  deletePatient: (cpf: string) => void;
 }

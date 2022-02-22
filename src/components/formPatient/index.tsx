@@ -10,7 +10,7 @@ import { PatientFormProps } from "./types";
 
 export const FormPatient = () => {
   const navigate = useNavigate();
-  const { CreatePatient } = usePatient();
+  const { createPatient } = usePatient();
   const {
     register,
     handleSubmit,
@@ -21,7 +21,8 @@ export const FormPatient = () => {
   });
 
   const onSubmitData = (data: PatientFormProps) => {
-    CreatePatient(data, navigate);
+    console.log("form data:", data);
+    createPatient(data, navigate);
     // reset();
   };
 
@@ -62,7 +63,7 @@ export const FormPatient = () => {
             type="text"
             placeholder="Genero"
             register={register}
-            name="gender"
+            name="sex"
             error={errors.gender?.message}
           />
           <Input
@@ -86,7 +87,7 @@ export const FormPatient = () => {
             type="text"
             placeholder="Plano de Saúde"
             register={register}
-            name="health_insurance"
+            name="health_plan"
             error={errors.health_insurance?.message}
           />
 
