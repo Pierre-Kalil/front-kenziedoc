@@ -6,45 +6,7 @@ import { useStateContext } from "../../context/States";
 import { useEffect } from "react";
 
 export const NavBar = () => {
-  const {
-    setAllProfessinals,
-    setAllAppointments,
-    setAllPatients,
-    setHome,
-    userType,
-  } = useStateContext();
-
-  const handleAppointment = () => {
-    setHome(false);
-    setAllProfessinals(false);
-    setAllPatients(false);
-    setAllAppointments(true);
-  };
-
-  const handleProfessional = () => {
-    setHome(false);
-    setAllAppointments(false);
-    setAllPatients(false);
-    setAllProfessinals(true);
-  };
-
-  const handlePatients = () => {
-    setHome(false);
-    setAllAppointments(false);
-    setAllProfessinals(false);
-    setAllPatients(true);
-  };
-
-  const handleHome = () => {
-    setAllProfessinals(false);
-    setAllPatients(false);
-    setAllAppointments(false);
-    setHome(true);
-  };
-
-  const handleLogout = () => {
-    localStorage.clear();
-  };
+  const { setPageToLoad, userType } = useStateContext();
 
   useEffect(() => {
     userType;
@@ -57,14 +19,14 @@ export const NavBar = () => {
         <nav className="nav">
           <ul>
             <li>
-              <button onClick={handleHome}>
+              <button onClick={() => setPageToLoad("home")}>
                 <FaHome />
                 <span className="title">Home</span>
               </button>
             </li>
             {userType.length === 11 || userType ? (
               <li>
-                <button onClick={handleProfessional}>
+                <button onClick={() => setPageToLoad("professionals")}>
                   <FaBookMedical />
                   <span className="title">Médicos</span>
                 </button>
@@ -74,7 +36,7 @@ export const NavBar = () => {
             )}
             {userType ? (
               <li>
-                <button onClick={handlePatients}>
+                <button onClick={() => setPageToLoad("patients")}>
                   <BsPeopleFill />
                   <span className="title">Pacientes</span>
                 </button>
@@ -84,21 +46,21 @@ export const NavBar = () => {
             )}
             {userType ? (
               <li>
-                <button onClick={handleAppointment}>
+                <button onClick={() => setPageToLoad("appointments")}>
                   <FaRegCalendarAlt />
                   <span className="title">Consultas</span>
                 </button>
               </li>
             ) : (
               <li>
-                <button onClick={handleAppointment}>
+                <button onClick={() => setPageToLoad("appointments")}>
                   <FaRegCalendarAlt />
                   <span className="title">Minhas Consultas</span>
                 </button>
               </li>
             )}
             <li>
-              <button onClick={handleLogout}>
+              <button onClick={() => setPageToLoad("logout")}>
                 <BiExit />
                 <span className="title">Sair</span>
               </button>

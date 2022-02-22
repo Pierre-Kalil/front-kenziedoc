@@ -12,7 +12,7 @@ const AppointmentContext = createContext<AppointmentsProviderProps>(
 export const AppointmentsProvider = ({
   children,
 }: AppointmentsContextProps) => {
-  const { token, identifyUser, user } = useAuth();
+  const { token, user } = useAuth();
   const [appointments, setAppointments] = useState<AppointmentsFormProps[]>(
     [] as AppointmentsFormProps[]
   );
