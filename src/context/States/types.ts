@@ -9,5 +9,4 @@ export interface ContextStates {
   modalAppointment: boolean;
   setPageToLoad: Dispatch<React.SetStateAction<string>>;
   pageToLoad: string;
-  userType: string;
 }

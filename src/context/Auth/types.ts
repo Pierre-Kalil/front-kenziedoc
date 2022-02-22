@@ -9,6 +9,7 @@ export interface AuthProviderProps {
 export interface AuthProviderData {
   signin: (data: LoginProps, navigate: NavigateFunction) => Promise<void>;
   token: string;
+  userType: string;
 }
 
 export interface Decoded {
