@@ -10,6 +10,4 @@ export interface ContextStates {
   setPageToLoad: Dispatch<React.SetStateAction<string>>;
   pageToLoad: string;
   userType: string;
-  setHome: Dispatch<React.SetStateAction<boolean>>;
-  home: boolean;
 }

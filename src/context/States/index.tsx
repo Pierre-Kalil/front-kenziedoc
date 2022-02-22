@@ -6,7 +6,6 @@ const StatesContext = createContext<ContextStates>({} as ContextStates);
 export const StatesProvider = ({ children }: ProviderStates) => {
   const [modalAppointment, setModalAppointment] = useState<boolean>(false);
   const [pageToLoad, setPageToLoad] = useState("home");
-  const [home, setHome] = useState<boolean>(false);
   const [userType, setUserType] = useState<string>(
     localStorage.getItem("@kenzieDoc:userBy") || ""
   );
@@ -19,8 +18,6 @@ export const StatesProvider = ({ children }: ProviderStates) => {
         setPageToLoad,
         pageToLoad,
         userType,
-        setHome,
-        home,
       }}
     >
       {children}
