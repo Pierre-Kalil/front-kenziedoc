@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { useStateContext } from "../../context/States";
 
 export const Logout = () => {
   const navigate = useNavigate();
+  const { setPageToLoad } = useStateContext();
   const handleLogout = () => {
-    localStorage.removeItem("@kenzieDoc:token");
-    localStorage.removeItem("@kenzieDoc:userBy");
+    localStorage.clear();
+    setPageToLoad("Home");
     navigate("/login");
   };
 
