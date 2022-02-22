@@ -1,9 +1,5 @@
 import { Outlet } from "react-router-dom";
-
-import { useAuth } from "../../context/Auth";
 import { ContainerMain, ContainerOutlet } from "./style";
-import { useState } from "react";
-import { useProfessional } from "../../context/Professional";
 import { NavBar } from "../../components/navBar";
 import { AllProfessionals } from "../allProfessionals";
 import { useStateContext } from "../../context/States";
