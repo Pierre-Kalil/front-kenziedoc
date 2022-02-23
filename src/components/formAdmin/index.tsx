@@ -1,9 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAdmin } from "../../context/Admin";
 import { Input } from "../input";
-import { Button, ContainerForm } from "./styles";
+import { Button, ContainerForm, LinkBox } from "./styles";
 import { AdminFormProps } from "./types";
 import { schema } from "./validators";
 
@@ -58,6 +58,10 @@ export const FormAdmin = () => {
             error={errors.confirmPassword?.message}
           />
           <Button type="submit">Cadastrar!</Button>
+          <LinkBox>
+            <Link to="/registermain">Voltar</Link>
+            <Link to="/">Voltar para Home</Link>
+          </LinkBox>
         </div>
       </form>
     </ContainerForm>

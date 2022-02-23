@@ -69,3 +69,10 @@ export const Button = styled.button`
   font-weight: bold;
   cursor: pointer;
 `;
+
+export const LinkBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 10px;
+`;
