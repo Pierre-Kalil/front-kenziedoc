@@ -19,7 +19,7 @@ const AppointmentContext = createContext<AppointmentsProviderProps>(
 export const AppointmentsProvider = ({
   children,
 }: AppointmentsContextProps) => {
-  const { token, userType } = useAuth();
+  const { token, user } = useAuth();
 
   const [appointmentPatient, setAppointmentPatient] = useState<
     AppointmentPatient[]
@@ -49,7 +49,7 @@ export const AppointmentsProvider = ({
   useEffect(() => {
     if (token) {
       api
-        .get(`/appointment/patient/${userType}`, {
+        .get(`/appointment/patient/${user.cpf}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -65,7 +65,7 @@ export const AppointmentsProvider = ({
   useEffect(() => {
     if (token) {
       api
-        .get(`/appointment/professional/${userType}`, {
+        .get(`/appointment/professional/${user.council_number}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -97,7 +97,7 @@ export const AppointmentsProvider = ({
   useEffect(() => {
     if (token) {
       api
-        .get(`/appointment/wait_list/${userType}`, {
+        .get(`/appointment/wait_list/${user.council_number}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

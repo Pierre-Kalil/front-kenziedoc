@@ -8,11 +8,10 @@ import jwt_decode from "jwt-decode";
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState({ name: "", email: "" });
   const [token, setToken] = useState(
     localStorage.getItem("@kenzieDoc:token") || ""
   );
-  const [userType, setUserType] = useState<string>("");
 
   const signin = async (data: LoginProps, navigate: NavigateFunction) => {
     await api
@@ -28,17 +27,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     if (token) {
-      const decoded = jwt_decode<Decoded>(token);
-      localStorage.setItem(
-        "@kenzieDoc:userBy",
-        JSON.stringify(decoded.cpf || decoded.council_number || decoded.isAdm)
-      );
-      setUserType(localStorage.getItem("@kenzieDoc:userBy") || "");
+      setUser(jwt_decode<Decoded>(token));
     }
   }, [token]);
 
   return (
-    <AuthContext.Provider value={{ signin, token, user, setUser, userType }}>
+    <AuthContext.Provider value={{ signin, token, user, setUser }}>
       {children}
     </AuthContext.Provider>
   );
