@@ -1,6 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../services/api";
-import { AppointmentsContextProps, AppointmentsProviderProps } from "./types";
+import {
+  AppointmentPatient,
+  AppointmentProf,
+  AppointmentsContextProps,
+  AppointmentsProviderProps,
+  Tomorrow,
+  WaitList,
+} from "./types";
 import toast from "react-hot-toast";
 import { AppointmentsFormProps } from "../../components/formAppointments/types";
 import { useAuth } from "../Auth";
@@ -12,12 +19,17 @@ const AppointmentContext = createContext<AppointmentsProviderProps>(
 export const AppointmentsProvider = ({
   children,
 }: AppointmentsContextProps) => {
-  const { token, user } = useAuth();
-  const [appointments, setAppointments] = useState<AppointmentsFormProps[]>(
-    [] as AppointmentsFormProps[]
+  const { token, userType } = useAuth();
+
+  const [appointmentPatient, setAppointmentPatient] = useState<
+    AppointmentPatient[]
+  >([] as AppointmentPatient[]);
+  const [appointmentProf, setAppointmentProf] = useState<AppointmentProf[]>(
+    [] as AppointmentProf[]
   );
-  console.log(appointments);
-  console.log(user);
+  const [tomorrow, setTomorrow] = useState<Tomorrow[]>([] as Tomorrow[]);
+  const [waitList, setWaitList] = useState<WaitList[]>([] as WaitList[]);
+
   const createAppointments = (newdata: AppointmentsFormProps) => {
     api
       .post("/appointments", newdata, {
@@ -33,23 +45,80 @@ export const AppointmentsProvider = ({
       });
   };
 
+  //appointments patient
   useEffect(() => {
     if (token) {
       api
-        .get(`/appointments/patient/${user?.cpf}`, {
+        .get(`/appointment/patient/${userType}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
         .then((res) => {
-          setAppointments(res.data);
+          setAppointmentPatient(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [token]);
+
+  //appointment professional
+  useEffect(() => {
+    if (token) {
+      api
+        .get(`/appointment/professional/${userType}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setAppointmentProf(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [token]);
+
+  //appointment tomorrow
+  useEffect(() => {
+    if (token) {
+      api
+        .get(`/appointment/tomorrow`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setTomorrow(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [token]);
+
+  //appointment wait list professional
+  useEffect(() => {
+    if (token) {
+      api
+        .get(`/appointment/wait_list/${userType}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setWaitList(res.data);
         })
         .catch((err) => console.log(err));
     }
   }, [token]);
 
   return (
-    <AppointmentContext.Provider value={{ appointments, createAppointments }}>
+    <AppointmentContext.Provider
+      value={{
+        createAppointments,
+        appointmentPatient,
+        appointmentProf,
+        tomorrow,
+        waitList,
+      }}
+    >
       {children}
     </AppointmentContext.Provider>
   );

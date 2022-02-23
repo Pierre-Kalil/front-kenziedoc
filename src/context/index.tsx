@@ -11,7 +11,9 @@ export const Providers = ({ children }: AuthProviderProps) => {
       <AuthProvider>
         <ProfessionalProvider>
           <PatientProvider>
-            <StatesProvider>{children}</StatesProvider>
+            <AppointmentsProvider>
+              <StatesProvider>{children}</StatesProvider>
+            </AppointmentsProvider>
           </PatientProvider>
         </ProfessionalProvider>
       </AuthProvider>

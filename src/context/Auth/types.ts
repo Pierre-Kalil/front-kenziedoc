@@ -11,6 +11,7 @@ export interface AuthProviderData {
   token: string;
   user: string;
   setUser: (value: string) => void;
+  userType: string;
 }
 
 export interface Decoded {

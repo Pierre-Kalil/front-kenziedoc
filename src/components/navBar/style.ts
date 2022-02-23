@@ -55,16 +55,18 @@ export const ContainerNavBar = styled.div`
     }
 
     .nav ul li:hover {
+      width: 300px;
       background: rgba(248, 298, 241, 0.9);
       color: rgb(31, 96, 203, 100%);
-      border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px;
+      /* border-top-left-radius: 10px; */
+      /* border-bottom-left-radius: 10px; */
     }
     .nav ul li button:hover {
+      width: 300px;
       background: rgba(248, 298, 241, 0.9);
       color: rgb(31, 96, 203, 100%);
-      border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px;
+      /* border-top-left-radius: 10px; */
+      /* border-bottom-left-radius: 10px; */
     }
   }
   @media only screen and (max-width: 768px) {

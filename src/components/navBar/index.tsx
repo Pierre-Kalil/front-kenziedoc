@@ -3,14 +3,11 @@ import { BiExit } from "react-icons/bi";
 import { BsPeopleFill } from "react-icons/bs";
 import { ContainerNavBar } from "./style";
 import { useStateContext } from "../../context/States";
-import { useEffect } from "react";
+import { useAuth } from "../../context/Auth";
 
 export const NavBar = () => {
-  const { setPageToLoad, userType } = useStateContext();
-
-  useEffect(() => {
-    userType;
-  }, [userType]);
+  const { setPageToLoad } = useStateContext();
+  const { userType } = useAuth();
 
   return (
     <ContainerNavBar>
