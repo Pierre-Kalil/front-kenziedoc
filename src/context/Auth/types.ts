@@ -9,6 +9,8 @@ export interface AuthProviderProps {
 export interface AuthProviderData {
   signin: (data: LoginProps, navigate: NavigateFunction) => Promise<void>;
   token: string;
+  user: string;
+  setUser: (value: string) => void;
   userType: string;
 }
 
