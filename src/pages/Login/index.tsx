@@ -1,13 +1,13 @@
 import { FormLogin } from "../../components/formLogin";
-import { ContanerLogin } from "./style";
+import { ContainerLogin } from "./style";
 
 export const Login = () => {
   return (
     <>
-      <ContanerLogin>
+      <ContainerLogin>
         <h1>Login</h1>
         <FormLogin />
-      </ContanerLogin>
+      </ContainerLogin>
     </>
   );
 };
