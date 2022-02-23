@@ -121,7 +121,6 @@ export const AllAppointments = () => {
           </HeaderProfAdmin>
           {appointments[appointmentsToLoad] === "wait" ? (
             <BoxAppointments>
-              <>wait</>
               {waitList.map((item, index) => (
                 <CardAppointments key={index}>
                   <span>{item.appointments}</span>
@@ -132,7 +131,6 @@ export const AllAppointments = () => {
             </BoxAppointments>
           ) : appointments[appointmentsToLoad] === "prof" ? (
             <BoxAppointments>
-              <>prof</>
               {appointmentProf.map((item, index) => (
                 <CardAppointments key={index}>
                   <span>{item.date}</span>
@@ -144,7 +142,6 @@ export const AllAppointments = () => {
             </BoxAppointments>
           ) : appointments[appointmentsToLoad] === "patients" ? (
             <BoxAppointments>
-              <>patients</>
               {appointmentPatient.map((item, index) => (
                 <CardAppointments key={index}>
                   <span>{item.date}</span>
@@ -157,7 +154,6 @@ export const AllAppointments = () => {
             </BoxAppointments>
           ) : (
             <BoxAppointments>
-              <>tomorrow</>
               {tomorrow.map((item, index) => (
                 <CardAppointments key={index}>
                   <span>{item.date}</span>
