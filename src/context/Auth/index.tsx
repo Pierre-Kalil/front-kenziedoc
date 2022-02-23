@@ -8,6 +8,7 @@ import jwt_decode from "jwt-decode";
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const [user, setUser] = useState("")
   const [token, setToken] = useState(
     localStorage.getItem("@kenzieDoc:token") || ""
   );
@@ -31,7 +32,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       .catch((err) => console.log(err, "erro"));
   };
   return (
-    <AuthContext.Provider value={{ signin, token }}>
+    <AuthContext.Provider value={{ signin, token, user, setUser }}>
       {children}
     </AuthContext.Provider>
   );
