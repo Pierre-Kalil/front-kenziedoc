@@ -19,7 +19,7 @@ const AppointmentContext = createContext<AppointmentsProviderProps>(
 export const AppointmentsProvider = ({
   children,
 }: AppointmentsContextProps) => {
-  const { token, userType } = useAuth();
+  const { token, user } = useAuth();
 
   const [appointmentPatient, setAppointmentPatient] = useState<
     AppointmentPatient[]
@@ -45,38 +45,37 @@ export const AppointmentsProvider = ({
       });
   };
 
-  // //appointments patient
-  // useEffect(() => {
-  //   if (token) {
-  //     api
-  //       .get(`/appointment/patient/${JSON.parse(userType)}`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       })
-  //       .then((res) => {
-  //         console.log(res);
-  //         setAppointmentPatient(res.data);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // }, [token]);
+  //appointments patient
+  useEffect(() => {
+    if (token) {
+      api
+        .get(`/appointment/patient/${user.cpf}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setAppointmentPatient(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [token]);
 
-  // //appointment professional
-  // useEffect(() => {
-  //   if (token) {
-  //     api
-  //       .get(`/appointment/professional/${JSON.parse(userType)}`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       })
-  //       .then((res) => {
-  //         setAppointmentProf(res.data);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // }, [token]);
+  //appointment professional
+  useEffect(() => {
+    if (token) {
+      api
+        .get(`/appointment/professional/${user.council_number}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setAppointmentProf(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [token]);
 
   // //appointment tomorrow
   // useEffect(() => {
@@ -94,21 +93,21 @@ export const AppointmentsProvider = ({
   //   }
   // }, [token]);
 
-  // //appointment wait list professional
-  // useEffect(() => {
-  //   if (token) {
-  //     api
-  //       .get(`/appointment/wait_list/${JSON.parse(userType)}`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       })
-  //       .then((res) => {
-  //         setWaitList(res.data);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // }, [token]);
+  //appointment wait list professional
+  useEffect(() => {
+    if (token) {
+      api
+        .get(`/appointment/wait_list/${user.council_number}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setWaitList(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [token]);
 
   return (
     <AppointmentContext.Provider

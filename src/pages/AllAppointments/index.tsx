@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useAppointment } from "../../context/Appointments";
 import { useAuth } from "../../context/Auth";
 import { useStateContext } from "../../context/States";
@@ -11,7 +12,7 @@ import {
 } from "./style";
 
 export const AllAppointments = () => {
-  const { userType } = useAuth();
+  const { user } = useAuth();
   const {
     appointmentsToLoad,
     setAppointmentsToLoad,
@@ -29,10 +30,13 @@ export const AllAppointments = () => {
     tomorrow: "tomorrow",
     wait: "wait",
   };
-
+  console.log(appointmentPatient);
+  useEffect(() => {
+    appointmentPatient;
+  }, []);
   return (
     <>
-      {userType.length === 11 ? (
+      {!user.isAdm && !user.isProf ? (
         <ContainerAppointments>
           <BoxAppointments>
             {appointmentPatient &&
@@ -50,7 +54,7 @@ export const AllAppointments = () => {
       ) : (
         <></>
       )}
-      {userType.length > 5 ? (
+      {user.isProf ? (
         <ContainerAppointments>
           <HeaderProfAdmin>
             <Ul>
@@ -95,7 +99,7 @@ export const AllAppointments = () => {
       ) : (
         <></>
       )}
-      {userType ? (
+      {user.isAdm ? (
         <ContainerAppointments>
           <HeaderProfAdmin>
             <Ul>
