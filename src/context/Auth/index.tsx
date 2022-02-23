@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     localStorage.getItem("@kenzieDoc:token") || ""
   );
   const [userType, setUserType] = useState<string>("");
-
+  console.log(userType.length);
   const signin = async (data: LoginProps, navigate: NavigateFunction) => {
     await api
       .post("/login", data)

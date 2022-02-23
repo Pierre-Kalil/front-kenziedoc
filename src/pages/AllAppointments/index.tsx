@@ -29,20 +29,22 @@ export const AllAppointments = () => {
     tomorrow: "tomorrow",
     wait: "wait",
   };
+
   return (
     <>
       {userType.length === 11 ? (
         <ContainerAppointments>
           <BoxAppointments>
-            {appointmentPatient.map((item, index) => (
-              <CardAppointments key={index}>
-                <span>{item.patient_name}</span>
-                <span>{item.date}</span>
-                <span>{item.professional.name}</span>
-                <span>{item.professional.specialty}</span>
-                <span>{item.finished}</span>
-              </CardAppointments>
-            ))}
+            {appointmentPatient &&
+              appointmentPatient.map((item, index) => (
+                <CardAppointments key={index}>
+                  <span>{item?.patient_name}</span>
+                  <span>{item?.date}</span>
+                  <span>{item?.professional.name}</span>
+                  <span>{item?.professional.specialty}</span>
+                  <span>{item?.finished}</span>
+                </CardAppointments>
+              ))}
           </BoxAppointments>
         </ContainerAppointments>
       ) : (
