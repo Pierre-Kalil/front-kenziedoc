@@ -1,16 +1,17 @@
 import { createContext, useContext } from "react";
 import toast from "react-hot-toast";
+import { AdminFormProps } from "../../components/formAdmin/types";
 import api from "../../services/api";
 import { useAuth } from "../Auth";
-import { AdminProps, AdminProviderData } from "./types";
+import { AdminProps, AdminProviderData, AdminProviderProps } from "./types";
 
 const AdminContext = createContext<AdminProviderData>({} as AdminProviderData);
 
-export const AdminProvider = ({ children }: AdminProviderData) => {
+export const AdminProvider = ({ children }: AdminProviderProps) => {
   const { token } = useAuth();
 
-  const createAdmin = (adminData: AdminFormProps) => {
-    api
+  const createAdmin = async (adminData: AdminFormProps) => {
+    await api
       .post("/admin", adminData)
       .then((_) => {
         toast.success("Admin cadastrado com sucesso!");
@@ -20,8 +21,8 @@ export const AdminProvider = ({ children }: AdminProviderData) => {
       });
   };
 
-  const updateAdmin = (id: string, data: any) => {
-    api
+  const updateAdmin = async (id: string, data: any) => {
+    await api
       .post(`/admin/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
