@@ -2,6 +2,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAdmin } from "../../context/Admin";
+import { Input } from "../input";
+import { Button, ContainerForm } from "./styles";
 import { AdminFormProps } from "./types";
 import { schema } from "./validators";
 
