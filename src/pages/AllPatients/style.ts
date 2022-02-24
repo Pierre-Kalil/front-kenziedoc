@@ -3,11 +3,6 @@ import styled from "styled-components";
 export const ContainerPatient = styled.div`
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
-  justify-content: center;
-  align-items: center;
-=======
->>>>>>> 818fa1313b854c381e83f22d50d5fb09a60aa927
   width: 95%;
   height: 95vh;
   background: rgba(248, 298, 241, 0.9);
