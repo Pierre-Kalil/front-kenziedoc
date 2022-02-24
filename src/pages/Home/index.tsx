@@ -7,7 +7,7 @@ import { FormUpdateProfessional } from "../../components/formUpdateProfessional"
 import { useAuth } from "../../context/Auth";
 import { usePatient } from "../../context/Patient";
 import { useProfessional } from "../../context/Professional";
-import { Container } from "./styles";
+import { Container, ContainerHome } from "./style";
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -24,35 +24,35 @@ export const Home = () => {
 
   return (
     <>
-      {/* <ContainerHome> */}
-      {user.isProf ? (
-        <>
-          <Container>
-            <h1>Bem-vindo(a), Dr(a). {user.name.split(" ")[0]}!</h1>
-            <p>{user.email}</p>
-            <p>{user.council_number}</p>
-            <button onClick={openModal}>Atualizar dados</button>
-          </Container>
-          {/* <BackgroundModal
+      <ContainerHome>
+        {user.isProf ? (
+          <>
+            <Container>
+              <h1>Bem-vindo(a), Dr(a). {user.name.split(" ")[0]}!</h1>
+              <p>{user.email}</p>
+              <p>{user.council_number}</p>
+              <button onClick={openModal}>Atualizar dados</button>
+            </Container>
+            {/* <BackgroundModal
             children={<FormUpdateProfessional close={closeModal} />}
             modal={modal}
           ></BackgroundModal> */}
-          <FormUpdateProfessional close={closeModal} />
-        </>
-      ) : (
-        <>
-          <Container>
-            <h1>Bem-vindo(a), {user.name.split(" ")[0]}!</h1>
-            <p>{user.email}</p>
-            <p>{user.cpf}</p>
-            <button onClick={openModal}>Atualizar dados</button>
-          </Container>
-          {/* <BackgroundModal>
+            <FormUpdateProfessional close={closeModal} />
+          </>
+        ) : (
+          <>
+            <Container>
+              <h1>Bem-vindo(a), {user.name.split(" ")[0]}!</h1>
+              <p>{user.email}</p>
+              <p>{user.cpf}</p>
+              <button onClick={openModal}>Atualizar dados</button>
+            </Container>
+            {/* <BackgroundModal>
               <FormUpdatePatient close={closeModal} />
             </BackgroundModal> */}
-        </>
-      )}
-      {/* </ContainerHome> */}
+          </>
+        )}
+      </ContainerHome>
     </>
   );
 };

@@ -21,10 +21,7 @@ export const ProfessionalProvider = ({
   const CreateProfessional = async (data: ProfessionalFormProps) => {
     const { council_number, name, email, phone, specialty, address, password } =
       data;
-<<<<<<< HEAD
-=======
 
->>>>>>> c5efa55959bb69cf10b2b19ed25642c1d60a04fd
     await api
       .post("/professional", {
         council_number: council_number,
