@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAdmin } from "../../context/Admin";
 import { Input } from "../input";
+import login from "../../assets/login.svg";
 import { Button, ContainerForm, LinkBox } from "./styles";
 import { AdminFormProps } from "./types";
 import { schema } from "./validators";
@@ -24,6 +25,10 @@ export const FormAdmin = () => {
   return (
     <ContainerForm>
       <form onSubmit={handleSubmit(onSubmitData)}>
+        <div className="test">
+          <span>Cadastre-se como secretária</span>
+          <img src={login} alt="" />
+        </div>
         <div className="inputs">
           <Input
             colorInput
