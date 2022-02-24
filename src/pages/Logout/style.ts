@@ -15,7 +15,7 @@ export const ContainerLogout = styled.div`
     width: 100px;
     margin-top: 10px;
     padding: 10px;
-    border: none;
+    border: 1px solid transparent;
     border-radius: 5px;
     background: rgb(68, 196, 249, 100%);
     color: rgba(248, 298, 241);
