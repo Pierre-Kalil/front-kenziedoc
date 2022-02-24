@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useAppointment } from "../../context/Appointments";
 import { useAuth } from "../../context/Auth";
 import { useStateContext } from "../../context/States";
@@ -12,6 +13,8 @@ import {
 
 export const AllAppointments = () => {
   const { user } = useAuth();
+  const { filterPatient, filterProfessional, filterTomorrow, filterWaitList } =
+    useAppointment();
   const {
     appointmentsToLoad,
     setAppointmentsToLoad,
@@ -29,25 +32,43 @@ export const AllAppointments = () => {
     tomorrow: "tomorrow",
     wait: "wait",
   };
+  console.log(appointmentPatient);
+  useEffect(() => {
+    filterPatient();
+    filterProfessional();
+    filterTomorrow();
+    filterWaitList();
+  }, []);
   return (
     <>
       {!user.isAdm && !user.isProf ? (
         <ContainerAppointments>
           <BoxAppointments>
-            {appointmentPatient.map((item, index) => (
-              <CardAppointments key={index}>
-                <span>{item.patient_name}</span>
-                <span>{item.date}</span>
-                <span>{item.professional.name}</span>
-                <span>{item.professional.specialty}</span>
-                <span>{item.finished}</span>
-              </CardAppointments>
-            ))}
+            {appointmentPatient &&
+              appointmentPatient.map((item, index) => (
+                <CardAppointments>
+                  <div className="left">
+                    <span>Paciente: </span>
+                    <span>Data:</span>
+                    <span>Doutor(a):</span>
+                    <span>Esp:</span>
+                    <span>Status:</span>
+                  </div>
+                  <div className="right" key={index}>
+                    <span>{item?.patient_name}</span>
+                    <span>{item?.date.slice(0, 10)}</span>
+                    <span>{item?.professional.name}</span>
+                    <span>{item?.professional.specialty}</span>
+                    <span>{item?.finished ? "Finalizada" : "Ativo"}</span>
+                  </div>
+                </CardAppointments>
+              ))}
           </BoxAppointments>
         </ContainerAppointments>
       ) : (
         <></>
       )}
+
       {user.isProf ? (
         <ContainerAppointments>
           <HeaderProfAdmin>
@@ -67,24 +88,42 @@ export const AllAppointments = () => {
           {profAppointment ? (
             <BoxAppointments>
               {waitList.map((item, index) => (
-                <CardAppointments key={index}>
-                  <span>{item.size}</span>
-                  <span>{item.appointments}</span>
-                  <span>{item.message}</span>
+                <CardAppointments>
+                  <span>CRM:</span>
+                  <div className="left">
+                    <span>Espera:</span>
+                    <span>Consulta:</span>
+                    <span>Mensagem:</span>
+                  </div>
+                  <div className="right" key={index}>
+                    <span>{item.size}</span>
+                    <span>{item.appointments}</span>
+                    <span>{item.message}</span>
+                  </div>
                 </CardAppointments>
               ))}
             </BoxAppointments>
           ) : (
             <BoxAppointments>
               {appointmentProf.map((item, index) => (
-                <CardAppointments key={index}>
-                  <span>{item.date}</span>
-                  <span>{item.patient.name}</span>
-                  <span>{item.patient.age}</span>
-                  <span>{item.patient.sex}</span>
-                  <span>{item.patient.healt_plan}</span>
-                  <span>{item.finished}</span>
-                  <button>Finalizar</button>
+                <CardAppointments>
+                  <div className="left">
+                    <span>Data:</span>
+                    <span>Nome: </span>
+                    <span>Idade:</span>
+                    <span>Sexo:</span>
+                    <span>Plano:</span>
+                    <span>Status</span>
+                  </div>
+                  <div className="right" key={index}>
+                    <span>{item.date}</span>
+                    <span>{item.patient.name}</span>
+                    <span>{item.patient.age}</span>
+                    <span>{item.patient.sex}</span>
+                    <span>{item.patient.healt_plan}</span>
+                    <span>{item?.finished ? "Finalizada" : "Ativo"}</span>
+                  </div>
+                  {/* <button>Finalizar</button> */}
                 </CardAppointments>
               ))}
             </BoxAppointments>
@@ -122,45 +161,77 @@ export const AllAppointments = () => {
           {appointments[appointmentsToLoad] === "wait" ? (
             <BoxAppointments>
               {waitList.map((item, index) => (
-                <CardAppointments key={index}>
-                  <span>{item.appointments}</span>
-                  <span>{item.message}</span>
-                  <span>{item.size}</span>
+                <CardAppointments>
+                  <div className="left">
+                    <span>Espera:</span>
+                    <span>Consulta:</span>
+                    <span>Mensagem:</span>
+                  </div>
+                  <div className="right" key={index}>
+                    <span>{item.size}</span>
+                    <span>{item.appointments}</span>
+                    <span>{item.message}</span>
+                  </div>
                 </CardAppointments>
               ))}
             </BoxAppointments>
           ) : appointments[appointmentsToLoad] === "prof" ? (
             <BoxAppointments>
               {appointmentProf.map((item, index) => (
-                <CardAppointments key={index}>
-                  <span>{item.date}</span>
-                  <span>{item.patient}</span>
-                  <span>{item.professional_name}</span>
-                  <span>{item.finished}</span>
+                <CardAppointments>
+                  <div className="left">
+                    <span>Data:</span>
+                    <span>Paciente:</span>
+                    <span>Doutor(a):</span>
+                    <span>Status:</span>
+                  </div>
+                  <div className="right" key={index}>
+                    <span>{item.date}</span>
+                    <span>{item.patient.name}</span>
+                    <span>{item.professional_name}</span>
+                    <span>{item?.finished ? "Finalizada" : "Ativo"}</span>
+                  </div>
                 </CardAppointments>
               ))}
             </BoxAppointments>
           ) : appointments[appointmentsToLoad] === "patients" ? (
             <BoxAppointments>
               {appointmentPatient.map((item, index) => (
-                <CardAppointments key={index}>
-                  <span>{item.date}</span>
-                  <span>{item.patient_name}</span>
-                  <span>{item.professional.name}</span>
-                  <span>{item.professional.council_number}</span>
-                  <span>{item.finished}</span>
+                <CardAppointments>
+                  <div className="left">
+                    <span>Data:</span>
+                    <span>Paciente:</span>
+                    <span>Doutor(a):</span>
+                    <span>CRM:</span>
+                    <span>Status:</span>
+                  </div>
+                  <div className="right" key={index}>
+                    <span>{item.date}</span>
+                    <span>{item.patient_name}</span>
+                    <span>{item.professional.name}</span>
+                    <span>{item.professional.council_number}</span>
+                    <span>{item?.finished ? "Finalizada" : "Ativo"}</span>
+                  </div>
                 </CardAppointments>
               ))}
             </BoxAppointments>
           ) : (
             <BoxAppointments>
-              {tomorrow.map((item, index) => (
-                <CardAppointments key={index}>
-                  <span>{item.date}</span>
-                  <span>{item.patient}</span>
-                  <span>{item.professional}</span>
-                </CardAppointments>
-              ))}
+              {tomorrow &&
+                tomorrow.map((item, index) => (
+                  <CardAppointments>
+                    <div className="left">
+                      <span>Data:</span>
+                      <span>Paciente:</span>
+                      <span>Doutor(a):</span>
+                    </div>
+                    <div className="right" key={index}>
+                      <span>{item.date}</span>
+                      <span>{item.patient.name}</span>
+                      <span>{item.professional.name}</span>
+                    </div>
+                  </CardAppointments>
+                ))}
             </BoxAppointments>
           )}
         </ContainerAppointments>

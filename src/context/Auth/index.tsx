@@ -12,7 +12,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useState(
     localStorage.getItem("@kenzieDoc:token") || ""
   );
-
   const signin = async (data: LoginProps, navigate: NavigateFunction) => {
     await api
       .post("/login", data)
@@ -30,7 +29,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setUser(jwt_decode<Decoded>(token));
     }
   }, [token]);
-
   return (
     <AuthContext.Provider value={{ signin, token, user, setUser }}>
       {children}

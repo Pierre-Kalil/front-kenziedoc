@@ -1,7 +1,9 @@
+import { ContainerPatient } from "./style";
+
 export const AllPatients = () => {
   return (
-    <>
-      <h1>Pacientes</h1>
-    </>
+    <ContainerPatient>
+      <input type="text" placeholder="CPF do paciente" />
+    </ContainerPatient>
   );
 };
