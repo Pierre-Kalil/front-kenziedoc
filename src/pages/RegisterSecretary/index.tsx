@@ -1,7 +1,12 @@
+import { FormAdmin } from "../../components/formAdmin";
+import { ContainerMain } from "./style";
+
 export const RegisterSecretary = () => {
   return (
     <>
-      <h1>Register Secretary</h1>
+      <ContainerMain>
+        <FormAdmin />
+      </ContainerMain>
     </>
   );
 };
