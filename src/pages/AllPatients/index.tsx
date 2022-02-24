@@ -1,3 +1,5 @@
+import { Card } from "../../components/card";
+
 export const AllPatients = () => {
   return (
     <>
