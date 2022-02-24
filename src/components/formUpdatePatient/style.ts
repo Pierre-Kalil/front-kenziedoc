@@ -7,11 +7,10 @@ export const ContainerForm = styled.div`
   align-items: center;
 
   width: 350px;
-  height: 420px;
-  position: absolute;
+  height: 650px;
 
   background: rgba(248, 248, 251, 1);
-  border-radius: 5px 5px 0 0;
+  border-radius: 5px;
 
   .test {
     display: flex;
@@ -40,7 +39,7 @@ export const ContainerForm = styled.div`
   }
 
   .inputs {
-    height: 80%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -55,7 +54,14 @@ export const ContainerForm = styled.div`
   }
 `;
 
-export const Button = styled.button`
+export const LinkBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 10px;
+`;
+
+export const ButtonPatient = styled.button`
   width: 100%;
   padding: 8px;
 
@@ -66,11 +72,4 @@ export const Button = styled.button`
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
-`;
-
-export const LinkBox = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  padding-bottom: 10px;
 `;

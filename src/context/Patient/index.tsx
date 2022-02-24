@@ -58,12 +58,11 @@ export const PatientProvider = ({ children }: PatientProviderProps) => {
   };
 
   const deletePatient = async (cpf: string) => {
-    const { setPageToLoad } = useStateContext();
     await api
       .delete(`/patient/${cpf}`)
       .then((res) => {
         toast.success("Paciente deletado com sucesso!");
-        setPageToLoad("home");
+        navigate("/login");
       })
       .catch((err) => console.log(err));
   };

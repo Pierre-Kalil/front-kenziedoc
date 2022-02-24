@@ -5,24 +5,23 @@ import { schema } from "./validators";
 import { Input } from "../input";
 import { ContainerForm, LinkBox, ButtonPatient } from "./style";
 import login from "../../assets/login.svg";
-import { ProfessionalFormProps } from "./types";
-import { useProfessional } from "../../context/Professional";
+import { PatientFormProps } from "./types";
+import { usePatient } from "../../context/Patient";
 import { useAuth } from "../../context/Auth";
 
-export const FormUpdateProfessional = ({ close }: any) => {
-  const { UpdateProfessional } = useProfessional();
+export const FormUpdatePatient = ({ close }) => {
+  const { updatePatient } = usePatient();
   const { user } = useAuth();
   const id = user.council_number;
   const {
-    handleSubmit,
     register,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmitData = (data: ProfessionalFormProps) => {
-    UpdateProfessional(id as string, data);
+  const onSubmitData = (data: PatientFormProps) => {
+    updatePatient(id as string, data);
     close();
     console.log(data);
   };
@@ -78,7 +77,7 @@ export const FormUpdateProfessional = ({ close }: any) => {
           <Input
             colorInput
             type="email"
-            placeholder={user.email}
+            placeholder="Email"
             register={register}
             name="email"
             error={errors.email?.message}
