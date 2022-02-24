@@ -20,9 +20,6 @@ export const ProfessionalProvider = ({
   const CreateProfessional = async (data: ProfessionalFormProps) => {
     const { council_number, name, email, phone, specialty, address, password } =
       data;
-    console.log("=====provider=====");
-
-    console.log(data);
 
     await api
       .post("/professional", {
@@ -76,7 +73,9 @@ export const ProfessionalProvider = ({
 
   const GetBySpecialty = async (specialty: string) => {
     await api
-      .get(`/professional/${specialty}`)
+      .get(`/professional/specialty/${specialty}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         console.log(res);
         setUser(res.data);
