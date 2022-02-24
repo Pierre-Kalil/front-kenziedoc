@@ -31,8 +31,9 @@ export const AppointmentsProvider = ({
   const [waitList, setWaitList] = useState<WaitList[]>([] as WaitList[]);
 
   const createAppointments = (newdata: AppointmentsFormProps) => {
+    console.log(newdata);
     api
-      .post("/appointments", newdata, {
+      .post("/appointment", newdata, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -41,7 +42,8 @@ export const AppointmentsProvider = ({
         toast.success("Consulta marcada com sucesso!");
       })
       .catch((err) => {
-        toast.success("Algo saiu errado. Tente novamente.");
+        console.log(err);
+        toast.error("Algo saiu errado. Tente novamente.");
       });
   };
 

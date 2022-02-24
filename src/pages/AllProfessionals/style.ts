@@ -28,7 +28,7 @@ export const ListProfessionals = styled.div`
   align-items: center;
   flex-wrap: wrap;
   width: 80%;
-  height: 70vh;
+  height: 85vh;
 
   overflow-y: scroll;
 

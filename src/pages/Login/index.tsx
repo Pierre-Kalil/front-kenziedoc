@@ -5,7 +5,6 @@ export const Login = () => {
   return (
     <>
       <ContainerLogin>
-        <h1>Login</h1>
         <FormLogin />
       </ContainerLogin>
     </>

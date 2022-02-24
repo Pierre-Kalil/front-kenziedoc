@@ -91,6 +91,41 @@ export const AllAppointments = () => {
 
       {user.isProf ? (
         <ContainerAppointments>
+          {MenuDrop ? (
+            <FiX className="close" onClick={CloseHamburguer} />
+          ) : (
+            <FiAlignJustify onClick={OpenHamburguer} />
+          )}
+          {MenuDrop ? (
+            <Menuhamburguer className={MenuDrop ? "menu active" : "menu"}>
+              <ul>
+                <li>
+                  <button
+                    onClick={() => setAppointmentsToLoad("professionals")}
+                  >
+                    <button
+                      className="secundary"
+                      onClick={() => setMenuDrop(false)}
+                    >
+                      Minhas consultas
+                    </button>
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => setAppointmentsToLoad("wait")}>
+                    <button
+                      className="secundary"
+                      onClick={() => setMenuDrop(false)}
+                    >
+                      lista de espera
+                    </button>
+                  </button>
+                </li>
+              </ul>
+            </Menuhamburguer>
+          ) : (
+            <></>
+          )}
           <HeaderProfAdmin>
             <Ul>
               <Li>

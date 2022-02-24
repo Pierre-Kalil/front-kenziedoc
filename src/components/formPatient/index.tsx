@@ -21,15 +21,14 @@ export const FormPatient = () => {
   });
 
   const onSubmitData = (data: PatientFormProps) => {
-    console.log("form data:", data);
     createPatient(data, navigate);
-    // reset();
+    reset();
   };
 
   return (
     <ContainerForm>
       <form onSubmit={handleSubmit(onSubmitData)}>
-        <div className="test">
+        <div className="header">
           <span>Cadastre-se como paciente</span>
           <img src={login} alt="" />
         </div>

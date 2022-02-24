@@ -30,13 +30,12 @@ export const AllProfessionals = () => {
       })
     );
   }, [search]);
-  console.log(allProfessional);
   return (
     <>
       <ContainerProfessionals>
         <input
           type="text"
-          placeholder="CRM do Médico"
+          placeholder="Especialidade do Médico"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
