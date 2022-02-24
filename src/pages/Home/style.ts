@@ -25,8 +25,7 @@ export const Container = styled.div`
   margin: 5px;
 
   h1 {
-    color: rgba(248, 298, 241, 0.9)
-    margin: 10px 0;
+    color: rgba(248, 298, 241, 0.9);
   }
 
   p {
