@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppointment } from "../../context/Appointments";
 import { useAuth } from "../../context/Auth";
 import { useStateContext } from "../../context/States";
@@ -9,6 +9,7 @@ import {
   HeaderProfAdmin,
   Ul,
   Li,
+  BoxSearch,
 } from "./style";
 
 export const AllAppointments = () => {
@@ -23,6 +24,8 @@ export const AllAppointments = () => {
   } = useStateContext();
   const { appointmentPatient, appointmentProf, tomorrow, waitList } =
     useAppointment();
+  const [cpf, setCpf] = useState("");
+  const [councilNumber, setCouncilNumber] = useState("");
 
   const appointments: {
     [key: string]: string;
@@ -32,13 +35,16 @@ export const AllAppointments = () => {
     tomorrow: "tomorrow",
     wait: "wait",
   };
-  const cpf = "";
+
   useEffect(() => {
     filterPatient(cpf);
-    filterProfessional();
+    filterProfessional(councilNumber);
     filterTomorrow();
     filterWaitList();
   }, []);
+  const handleSearch = () => {
+    filterPatient(cpf);
+  };
   return (
     <>
       {!user.isAdm && !user.isProf ? (
@@ -160,6 +166,29 @@ export const AllAppointments = () => {
               </Li>
             </Ul>
           </HeaderProfAdmin>
+          {appointments[appointmentsToLoad] === "patients" ? (
+            <BoxSearch>
+              <input
+                type="text"
+                placeholder="CPF do paciente"
+                value={cpf}
+                onChange={(e) => setCpf(e.target.value)}
+              />
+              <button onClick={handleSearch}>Pesquisar</button>
+            </BoxSearch>
+          ) : appointments[appointmentsToLoad] === "prof" ? (
+            <BoxSearch>
+              <input
+                type="text"
+                placeholder="CRM do Médico"
+                value={councilNumber}
+                onChange={(e) => setCouncilNumber(e.target.value)}
+              />
+              <button onClick={handleSearch}>Pesquisar</button>
+            </BoxSearch>
+          ) : (
+            <></>
+          )}
           {appointments[appointmentsToLoad] === "wait" ? (
             <BoxAppointments>
               {waitList.map((item, index) => (

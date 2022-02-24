@@ -29,7 +29,7 @@ export const AllPatients = () => {
                 <span>Paciente: </span>
                 <span>Data:</span>
                 <span>Horário:</span>
-                <span>Doutor(a):</span>
+                <span>Médico(a):</span>
                 <span>Esp:</span>
                 <span>Status:</span>
               </div>

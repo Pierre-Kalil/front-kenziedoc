@@ -10,12 +10,53 @@ export const ContainerAppointments = styled.div`
   overflow-y: scroll hidden;
 `;
 
+export const BoxSearch = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  input {
+    padding: 10px;
+    border: 1px solid rgb(68, 196, 249, 100%);
+    border-radius: 5px;
+  }
+
+  input:hover {
+    border: 2px solid rgb(68, 196, 249, 100%);
+  }
+
+  button {
+    margin: 0px 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(68, 196, 249, 100%);
+    color: rgba(248, 298, 241);
+
+    cursor: pointer;
+  }
+
+  button:hover {
+    color: rgb(68, 196, 249, 100%);
+    font-weight: bold;
+    background: rgba(248, 298, 241);
+    border: 1px solid rgb(68, 196, 249, 100%);
+    transition: 0.5s;
+  }
+
+  button:active {
+    background: rgb(68, 196, 249, 100%);
+    color: rgba(248, 298, 241);
+    transition: 0.1s;
+  }
+`;
+
 export const BoxAppointments = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  height: 70vh;
+  height: 60vh;
   margin-top: 20px;
 `;
 

@@ -60,14 +60,17 @@ export const AppointmentsProvider = ({
     }
   };
 
-  const filterProfessional = () => {
-    if (token && user.council_number) {
+  const filterProfessional = (councilNumber: string) => {
+    if ((token && user.council_number) || councilNumber) {
       api
-        .get(`/appointment/professional/${user.council_number}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .get(
+          `/appointment/professional/${user.council_number || councilNumber}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           setAppointmentProf(res.data);
         })

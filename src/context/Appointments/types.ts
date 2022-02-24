@@ -8,7 +8,7 @@ export interface AppointmentsContextProps {
 export interface AppointmentsProviderProps {
   createAppointments: (newdata: AppointmentsFormProps) => void;
   filterPatient: (cpf: string) => void;
-  filterProfessional: () => void;
+  filterProfessional: (councilNumber: string) => void;
   filterTomorrow: () => void;
   filterWaitList: () => void;
   appointmentPatient: AppointmentPatient[];
