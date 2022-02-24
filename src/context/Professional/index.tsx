@@ -21,6 +21,10 @@ export const ProfessionalProvider = ({
   const CreateProfessional = async (data: ProfessionalFormProps) => {
     const { council_number, name, email, phone, specialty, address, password } =
       data;
+<<<<<<< HEAD
+=======
+
+>>>>>>> c5efa55959bb69cf10b2b19ed25642c1d60a04fd
     await api
       .post("/professional", {
         council_number: council_number,
@@ -73,7 +77,9 @@ export const ProfessionalProvider = ({
 
   const GetBySpecialty = async (specialty: string) => {
     await api
-      .get(`/professional/${specialty}`)
+      .get(`/professional/specialty/${specialty}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         console.log(res);
         setUser(res.data);
@@ -88,10 +94,7 @@ export const ProfessionalProvider = ({
         toast.success("Profissional deletado com sucesso!");
         navigate("/login");
       })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Ocorreu um erro ao deletar o profissional");
-      });
+      .catch((err) => toast.error("Ocorreu um erro ao deletar o profissional"));
   };
 
   useEffect(() => {}, []);
