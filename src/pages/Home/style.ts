@@ -2,16 +2,20 @@ import styled from "styled-components";
 
 export const ContainerHome = styled.div`
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   width: 95%;
   height: 95vh;
   background: rgba(248, 298, 241, 0.9);
   border-radius: 20px;
+  padding: 1rem;
   overflow-y: scroll hidden;
 `;
 
 export const Container = styled.div`
-  background-color: #f7f5f5;
+  background-color: rgb(68, 196, 249, 100%);
   width: 290px;
   height: 210px;
   padding: 10px 15px;
@@ -21,7 +25,13 @@ export const Container = styled.div`
   margin: 5px;
 
   h1 {
+    color: rgba(248, 298, 241, 0.9)
     margin: 10px 0;
+  }
+
+  p {
+    color: rgba(248, 298, 241, 0.9);
+    margin: 1rem;
   }
 
   button {
