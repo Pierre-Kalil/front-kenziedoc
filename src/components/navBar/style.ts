@@ -69,6 +69,7 @@ export const ContainerNavBar = styled.div`
   @media only screen and (max-width: 768px) {
     width: 70px;
     overflow-x: hidden;
+
     .boxnav:hover {
       width: 100vw;
     }

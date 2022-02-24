@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppointment } from "../../context/Appointments";
 import { useAuth } from "../../context/Auth";
 import { useStateContext } from "../../context/States";
@@ -9,7 +9,10 @@ import {
   HeaderProfAdmin,
   Ul,
   Li,
+  BoxSearch,
+  Menuhamburguer,
 } from "./style";
+import { FiAlignJustify, FiX } from "react-icons/fi";
 
 export const AllAppointments = () => {
   const { user } = useAuth();
@@ -23,6 +26,9 @@ export const AllAppointments = () => {
   } = useStateContext();
   const { appointmentPatient, appointmentProf, tomorrow, waitList } =
     useAppointment();
+  const [cpf, setCpf] = useState("");
+  const [councilNumber, setCouncilNumber] = useState("");
+  const [MenuDrop, setMenuDrop] = useState(false);
 
   const appointments: {
     [key: string]: string;
@@ -32,13 +38,25 @@ export const AllAppointments = () => {
     tomorrow: "tomorrow",
     wait: "wait",
   };
-  console.log(appointmentPatient);
+
   useEffect(() => {
-    filterPatient();
-    filterProfessional();
     filterTomorrow();
-    filterWaitList();
   }, []);
+
+  const handleSearch = () => {
+    filterPatient(cpf);
+    filterProfessional(councilNumber);
+    filterWaitList(councilNumber);
+  };
+
+  const OpenHamburguer = () => {
+    setMenuDrop(true);
+  };
+
+  const CloseHamburguer = () => {
+    setMenuDrop(false);
+  };
+
   return (
     <>
       {!user.isAdm && !user.isProf ? (
@@ -50,13 +68,15 @@ export const AllAppointments = () => {
                   <div className="left">
                     <span>Paciente: </span>
                     <span>Data:</span>
-                    <span>Doutor(a):</span>
+                    <span>Horário:</span>
+                    <span>Médico(a):</span>
                     <span>Esp:</span>
                     <span>Status:</span>
                   </div>
                   <div className="right" key={index}>
                     <span>{item?.patient_name}</span>
                     <span>{item?.date.slice(0, 10)}</span>
+                    <span>{item.date.slice(11, 16)}</span>
                     <span>{item?.professional.name}</span>
                     <span>{item?.professional.specialty}</span>
                     <span>{item?.finished ? "Finalizada" : "Ativo"}</span>
@@ -134,6 +154,61 @@ export const AllAppointments = () => {
       )}
       {user.isAdm ? (
         <ContainerAppointments>
+          {MenuDrop ? (
+            <FiX className="close" onClick={CloseHamburguer} />
+          ) : (
+            <FiAlignJustify onClick={OpenHamburguer} />
+          )}
+          {MenuDrop ? (
+            <Menuhamburguer className={MenuDrop ? "menu active" : "menu"}>
+              <ul>
+                <li>
+                  <button onClick={() => setAppointmentsToLoad("patients")}>
+                    <button
+                      className="secundary"
+                      onClick={() => setMenuDrop(false)}
+                    >
+                      Consultas paciente
+                    </button>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => setAppointmentsToLoad("professionals")}
+                  >
+                    <button
+                      className="secundary"
+                      onClick={() => setMenuDrop(false)}
+                    >
+                      Consultas médico
+                    </button>
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => setAppointmentsToLoad("wait")}>
+                    <button
+                      className="secundary"
+                      onClick={() => setMenuDrop(false)}
+                    >
+                      lista de espera médico
+                    </button>
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => setAppointmentsToLoad("tomorrow")}>
+                    <button
+                      className="secundary"
+                      onClick={() => setMenuDrop(false)}
+                    >
+                      Consultas de amanhã
+                    </button>
+                  </button>
+                </li>
+              </ul>
+            </Menuhamburguer>
+          ) : (
+            <></>
+          )}
           <HeaderProfAdmin>
             <Ul>
               <Li>
@@ -158,6 +233,30 @@ export const AllAppointments = () => {
               </Li>
             </Ul>
           </HeaderProfAdmin>
+          {appointments[appointmentsToLoad] === "patients" ? (
+            <BoxSearch>
+              <input
+                type="text"
+                placeholder="CPF do paciente"
+                value={cpf}
+                onChange={(e) => setCpf(e.target.value)}
+              />
+              <button onClick={handleSearch}>Pesquisar</button>
+            </BoxSearch>
+          ) : appointments[appointmentsToLoad] === "prof" ||
+            appointments[appointmentsToLoad] === "wait" ? (
+            <BoxSearch>
+              <input
+                type="text"
+                placeholder="CRM do Médico"
+                value={councilNumber}
+                onChange={(e) => setCouncilNumber(e.target.value)}
+              />
+              <button onClick={handleSearch}>Pesquisar</button>
+            </BoxSearch>
+          ) : (
+            <></>
+          )}
           {appointments[appointmentsToLoad] === "wait" ? (
             <BoxAppointments>
               {waitList.map((item, index) => (
@@ -182,7 +281,7 @@ export const AllAppointments = () => {
                   <div className="left">
                     <span>Data:</span>
                     <span>Paciente:</span>
-                    <span>Doutor(a):</span>
+                    <span>Médico(a):</span>
                     <span>Status:</span>
                   </div>
                   <div className="right" key={index}>
@@ -200,13 +299,15 @@ export const AllAppointments = () => {
                 <CardAppointments>
                   <div className="left">
                     <span>Data:</span>
+                    <span>Horário:</span>
                     <span>Paciente:</span>
-                    <span>Doutor(a):</span>
+                    <span>Médico(a):</span>
                     <span>CRM:</span>
                     <span>Status:</span>
                   </div>
                   <div className="right" key={index}>
-                    <span>{item.date}</span>
+                    <span>{item.date.slice(0, 10)}</span>
+                    <span>{item.date.slice(11, 16)}</span>
                     <span>{item.patient_name}</span>
                     <span>{item.professional.name}</span>
                     <span>{item.professional.council_number}</span>
@@ -222,11 +323,13 @@ export const AllAppointments = () => {
                   <CardAppointments>
                     <div className="left">
                       <span>Data:</span>
+                      <span>Horário:</span>
                       <span>Paciente:</span>
-                      <span>Doutor(a):</span>
+                      <span>Médico(a):</span>
                     </div>
                     <div className="right" key={index}>
-                      <span>{item.date}</span>
+                      <span>{item.date.slice(0, 10)}</span>
+                      <span>{item.date.slice(11, 16)}</span>
                       <span>{item.patient.name}</span>
                       <span>{item.professional.name}</span>
                     </div>

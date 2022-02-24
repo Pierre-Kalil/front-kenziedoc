@@ -3,20 +3,21 @@ import { Container } from "./styles";
 import { IProps } from "./types";
 
 export const Card = (props: IProps) => {
-  const [buttonText, setButtonText] = useState("Marcar consulta");
   const person = props.person;
+  const arrName = person.name.split(" ");
   return (
     <Container>
-      <h2>{person.name}</h2>
+      <h2>{arrName[0] + " " + arrName[1]}</h2>
       {person.specialty ? (
         <h3>{person.specialty}</h3>
       ) : (
         <h3>
-          {person.sex} - {person.age}
+          {person.sex}
+          <br /> {person.age}
         </h3>
       )}
       <h3>{person.health_plan || person.council_number}</h3>
-      {person.specialty && <button>{buttonText}</button>}
+      {person.specialty && <button>Marcar consulta</button>}
     </Container>
   );
 };
