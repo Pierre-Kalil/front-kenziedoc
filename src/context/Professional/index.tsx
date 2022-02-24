@@ -18,22 +18,19 @@ export const ProfessionalProvider = ({
   const navigate = useNavigate();
 
   const CreateProfessional = async (data: ProfessionalFormProps) => {
-    const {
-      council_number,
-      name,
-      email,
-      phone,
-      specialty,
-      address,
-      password,
-    } = data;
+    const { council_number, name, email, phone, specialty, address, password } =
+      data;
+    console.log("=====provider=====");
+
+    console.log(data);
+
     await api
       .post("/professional", {
         council_number: council_number,
         name: name,
         email: email,
         phone: phone,
-        speciality: specialty,
+        specialty: specialty,
         address: address,
         password: password,
       })
@@ -45,13 +42,13 @@ export const ProfessionalProvider = ({
   };
   const ListAllProfessional = async () => {
     await api
-    .get('/professional', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((res) => {
-      setAllProfessional(res.data);
-    })
-    .catch((e) => console.log(e, "error get all professional"))
+      .get("/professional", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setAllProfessional(res.data);
+      })
+      .catch((e) => console.log(e, "error get all professional"));
   };
 
   const ProfessionalById = async (identify: string) => {
@@ -68,37 +65,47 @@ export const ProfessionalProvider = ({
   const UpdateProfessional = async (identify: string, data: any) => {
     await api
       .patch(`/professional/${identify}`, data)
-      .then((res)=> {
-        console.log(res)
-        toast.success("Profissional atualizado com sucesso!")
+      .then((res) => {
+        console.log(res);
+        toast.success("Profissional atualizado com sucesso!");
       })
-      .catch((err)=> toast.error("Ocorreu um erro ao atualizar o profissional!"))
+      .catch((err) =>
+        toast.error("Ocorreu um erro ao atualizar o profissional!")
+      );
   };
 
   const GetBySpecialty = async (specialty: string) => {
     await api
       .get(`/professional/${specialty}`)
-      .then((res)=> {
-        console.log((res))
-        setUser(res.data)
+      .then((res) => {
+        console.log(res);
+        setUser(res.data);
       })
-      .catch((err)=> console.log(err))
+      .catch((err) => console.log(err));
   };
 
   const DeleteProfessional = async (identify: string) => {
     await api
       .delete(`/professional/${identify}`)
-      .then((res)=> {
+      .then((res) => {
         toast.success("Profissional deletado com sucesso!");
       })
-      .catch((err)=> toast.error("Ocorreu um erro ao deletar o profissional"))
+      .catch((err) => toast.error("Ocorreu um erro ao deletar o profissional"));
   };
 
   useEffect(() => {}, []);
 
   return (
     <ProfessionalContext.Provider
-      value={{ ProfessionalById, ListAllProfessional, CreateProfessional, DeleteProfessional, GetBySpecialty, UpdateProfessional, allProfessional }}
+      value={{
+        ProfessionalById,
+        ListAllProfessional,
+        CreateProfessional,
+        DeleteProfessional,
+        GetBySpecialty,
+        UpdateProfessional,
+        allProfessional,
+      }}
     >
       {children}
     </ProfessionalContext.Provider>
