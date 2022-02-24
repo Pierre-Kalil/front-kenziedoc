@@ -5,6 +5,7 @@ import { PatientProviderData, PatientProviderProps } from "./types";
 import api from "../../services/api";
 import { useAuth } from "../Auth";
 import toast from "react-hot-toast";
+import { useStateContext } from "../States";
 
 const PatientContext = createContext<PatientProviderData>(
   {} as PatientProviderData
@@ -57,10 +58,12 @@ export const PatientProvider = ({ children }: PatientProviderProps) => {
   };
 
   const deletePatient = async (cpf: string) => {
+    const { setPageToLoad } = useStateContext();
     await api
       .delete(`/patient/${cpf}`)
       .then((res) => {
         toast.success("Paciente deletado com sucesso!");
+        setPageToLoad("home");
       })
       .catch((err) => console.log(err));
   };
