@@ -3,19 +3,16 @@ import { BiExit } from "react-icons/bi";
 import { BsPeopleFill } from "react-icons/bs";
 import { ContainerNavBar } from "./style";
 import { useStateContext } from "../../context/States";
-import { useEffect } from "react";
+import { useAuth } from "../../context/Auth";
 
 export const NavBar = () => {
-  const { setPageToLoad, userType } = useStateContext();
-
-  useEffect(() => {
-    userType;
-  }, [userType]);
+  const { setPageToLoad } = useStateContext();
+  const { user } = useAuth();
 
   return (
     <ContainerNavBar>
       <div className="boxnav">
-        <h1>{userType}</h1>
+        <h1>{user.name.split(" ")[0]}</h1>
         <nav className="nav">
           <ul>
             <li>
@@ -24,7 +21,7 @@ export const NavBar = () => {
                 <span className="title">Home</span>
               </button>
             </li>
-            {userType.length === 11 || userType ? (
+            {user.isAdm || !user.isProf ? (
               <li>
                 <button onClick={() => setPageToLoad("professionals")}>
                   <FaBookMedical />
@@ -34,7 +31,7 @@ export const NavBar = () => {
             ) : (
               <></>
             )}
-            {userType ? (
+            {user.isAdm ? (
               <li>
                 <button onClick={() => setPageToLoad("patients")}>
                   <BsPeopleFill />
@@ -44,7 +41,7 @@ export const NavBar = () => {
             ) : (
               <></>
             )}
-            {userType ? (
+            {user.isAdm ? (
               <li>
                 <button onClick={() => setPageToLoad("appointments")}>
                   <FaRegCalendarAlt />

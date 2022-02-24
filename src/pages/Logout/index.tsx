@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useStateContext } from "../../context/States";
+import { ContainerLogout } from "./style";
 
 export const Logout = () => {
   const navigate = useNavigate();
@@ -11,9 +12,9 @@ export const Logout = () => {
   };
 
   return (
-    <div>
+    <ContainerLogout>
       <h2>Deseja mesmo sair?</h2>
       <button onClick={handleLogout}>Sim</button>
-    </div>
+    </ContainerLogout>
   );
 };

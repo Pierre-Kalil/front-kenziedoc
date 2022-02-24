@@ -9,5 +9,8 @@ export interface ContextStates {
   modalAppointment: boolean;
   setPageToLoad: Dispatch<React.SetStateAction<string>>;
   pageToLoad: string;
-  userType: string;
+  setAppointmentsToLoad: Dispatch<React.SetStateAction<string>>;
+  appointmentsToLoad: string;
+  setProfAppointment: Dispatch<React.SetStateAction<boolean>>;
+  profAppointment: boolean;
 }

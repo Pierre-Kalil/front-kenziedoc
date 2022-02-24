@@ -14,8 +14,8 @@ export const AllProfessionals = () => {
 
   return (
     <>
-      <h1>Medicos</h1>
       <ContainerProfessionals>
+        <input type="text" placeholder="CRM do Médico" />
         {modalAppointment ? <FormAppointments /> : <></>}
         {allProfessional &&
           allProfessional.map((item, index) => (

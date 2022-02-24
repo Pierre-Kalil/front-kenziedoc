@@ -16,7 +16,11 @@ export interface ProfessionalProps {
 }
 
 export interface ProfessionalDataProps {
-  FilterByProfessional: (identify: string) => void;
-  CreateProfessioanal: (data: ProfessionalFormProps) => void;
+  ProfessionalById: (identify: string) => void;
+  ListAllProfessional: () => void;
+  CreateProfessional: (data: ProfessionalFormProps) => void;
+  DeleteProfessional: (identify: string) => void;
+  GetBySpecialty: (specialty: string) => void;
+  UpdateProfessional: (identify: string, data: ProfessionalFormProps) => void;
   allProfessional: ProfessionalProps[];
 }

@@ -9,6 +9,16 @@ export interface AuthProviderProps {
 export interface AuthProviderData {
   signin: (data: LoginProps, navigate: NavigateFunction) => Promise<void>;
   token: string;
+  setUser: (value: IUserToken) => void;
+  user: IUserToken;
+}
+interface IUserToken {
+  name: string;
+  email: string;
+  cpf?: string;
+  council_number?: string;
+  isProf?: boolean;
+  isAdm?: boolean;
 }
 
 export interface Decoded {
