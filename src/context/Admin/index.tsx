@@ -17,7 +17,9 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
         toast.success("Admin cadastrado com sucesso!");
       })
       .catch((_) => {
-        toast.error("Algo saiu errado. Tente novamente.");
+        toast.error(
+          "Algo saiu errado. Verifique se o email não está repetido e tente novamente."
+        );
       });
   };
 

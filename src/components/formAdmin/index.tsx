@@ -16,10 +16,13 @@ export const FormAdmin = () => {
     formState: { errors },
     handleSubmit,
     register,
+    reset,
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmitData = (data: AdminFormProps) => {
     createAdmin(data, navigate);
+    reset();
+    console.log(data);
   };
 
   return (
@@ -56,11 +59,11 @@ export const FormAdmin = () => {
           />
           <Input
             colorInput
-            name="confirmPassword"
-            placeholder="Confirmar senha"
             type="password"
+            name="passwordConfirm"
+            placeholder="Confirmar senha"
             register={register}
-            error={errors.confirmPassword?.message}
+            error={errors.passwordConfirm?.message}
           />
           <Button type="submit">Cadastrar!</Button>
           <LinkBox>
