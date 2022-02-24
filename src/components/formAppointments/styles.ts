@@ -53,6 +53,8 @@ export const ContainerForm = styled.div`
     justify-content: space-evenly;
     input {
       margin: 2px 0;
+      border: none;
+      width: 100%;
     }
   }
 

@@ -64,7 +64,7 @@ export const AllAppointments = () => {
           <BoxAppointments>
             {appointmentPatient &&
               appointmentPatient.map((item, index) => (
-                <CardAppointments>
+                <CardAppointments key={index}>
                   <div className="left">
                     <span>Paciente: </span>
                     <span>Data:</span>
@@ -73,7 +73,7 @@ export const AllAppointments = () => {
                     <span>Esp:</span>
                     <span>Status:</span>
                   </div>
-                  <div className="right" key={index}>
+                  <div className="right">
                     <span>{item?.patient_name}</span>
                     <span>{item?.date.slice(0, 10)}</span>
                     <span>{item.date.slice(11, 16)}</span>
@@ -108,14 +108,14 @@ export const AllAppointments = () => {
           {profAppointment ? (
             <BoxAppointments>
               {waitList.map((item, index) => (
-                <CardAppointments>
+                <CardAppointments key={index}>
                   <span>CRM:</span>
                   <div className="left">
                     <span>Espera:</span>
                     <span>Consulta:</span>
                     <span>Mensagem:</span>
                   </div>
-                  <div className="right" key={index}>
+                  <div className="right">
                     <span>{item.size}</span>
                     <span>{item.appointments}</span>
                     <span>{item.message}</span>
@@ -126,7 +126,7 @@ export const AllAppointments = () => {
           ) : (
             <BoxAppointments>
               {appointmentProf.map((item, index) => (
-                <CardAppointments>
+                <CardAppointments key={index}>
                   <div className="left">
                     <span>Data:</span>
                     <span>Nome: </span>
@@ -135,7 +135,7 @@ export const AllAppointments = () => {
                     <span>Plano:</span>
                     <span>Status</span>
                   </div>
-                  <div className="right" key={index}>
+                  <div className="right">
                     <span>{item.date}</span>
                     <span>{item.patient.name}</span>
                     <span>{item.patient.age}</span>
@@ -260,13 +260,13 @@ export const AllAppointments = () => {
           {appointments[appointmentsToLoad] === "wait" ? (
             <BoxAppointments>
               {waitList.map((item, index) => (
-                <CardAppointments>
+                <CardAppointments key={index}>
                   <div className="left">
                     <span>Espera:</span>
                     <span>Consulta:</span>
                     <span>Mensagem:</span>
                   </div>
-                  <div className="right" key={index}>
+                  <div className="right">
                     <span>{item.size}</span>
                     <span>{item.appointments}</span>
                     <span>{item.message}</span>
@@ -277,14 +277,14 @@ export const AllAppointments = () => {
           ) : appointments[appointmentsToLoad] === "prof" ? (
             <BoxAppointments>
               {appointmentProf.map((item, index) => (
-                <CardAppointments>
+                <CardAppointments key={index}>
                   <div className="left">
                     <span>Data:</span>
                     <span>Paciente:</span>
                     <span>Médico(a):</span>
                     <span>Status:</span>
                   </div>
-                  <div className="right" key={index}>
+                  <div className="right">
                     <span>{item.date}</span>
                     <span>{item.patient.name}</span>
                     <span>{item.professional_name}</span>
@@ -296,7 +296,7 @@ export const AllAppointments = () => {
           ) : appointments[appointmentsToLoad] === "patients" ? (
             <BoxAppointments>
               {appointmentPatient.map((item, index) => (
-                <CardAppointments>
+                <CardAppointments key={index}>
                   <div className="left">
                     <span>Data:</span>
                     <span>Horário:</span>
@@ -305,7 +305,7 @@ export const AllAppointments = () => {
                     <span>CRM:</span>
                     <span>Status:</span>
                   </div>
-                  <div className="right" key={index}>
+                  <div className="right">
                     <span>{item.date.slice(0, 10)}</span>
                     <span>{item.date.slice(11, 16)}</span>
                     <span>{item.patient_name}</span>
@@ -320,14 +320,14 @@ export const AllAppointments = () => {
             <BoxAppointments>
               {tomorrow &&
                 tomorrow.map((item, index) => (
-                  <CardAppointments>
+                  <CardAppointments key={index}>
                     <div className="left">
                       <span>Data:</span>
                       <span>Horário:</span>
                       <span>Paciente:</span>
                       <span>Médico(a):</span>
                     </div>
-                    <div className="right" key={index}>
+                    <div className="right">
                       <span>{item.date.slice(0, 10)}</span>
                       <span>{item.date.slice(11, 16)}</span>
                       <span>{item.patient.name}</span>
