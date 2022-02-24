@@ -32,9 +32,9 @@ export const AllAppointments = () => {
     tomorrow: "tomorrow",
     wait: "wait",
   };
-  console.log(appointmentPatient);
+  const cpf = "";
   useEffect(() => {
-    filterPatient();
+    filterPatient(cpf);
     filterProfessional();
     filterTomorrow();
     filterWaitList();
@@ -50,6 +50,7 @@ export const AllAppointments = () => {
                   <div className="left">
                     <span>Paciente: </span>
                     <span>Data:</span>
+                    <span>Horário:</span>
                     <span>Doutor(a):</span>
                     <span>Esp:</span>
                     <span>Status:</span>
@@ -57,6 +58,7 @@ export const AllAppointments = () => {
                   <div className="right" key={index}>
                     <span>{item?.patient_name}</span>
                     <span>{item?.date.slice(0, 10)}</span>
+                    <span>{item.date.slice(11, 16)}</span>
                     <span>{item?.professional.name}</span>
                     <span>{item?.professional.specialty}</span>
                     <span>{item?.finished ? "Finalizada" : "Ativo"}</span>
@@ -222,11 +224,13 @@ export const AllAppointments = () => {
                   <CardAppointments>
                     <div className="left">
                       <span>Data:</span>
+                      <span>Horário:</span>
                       <span>Paciente:</span>
                       <span>Doutor(a):</span>
                     </div>
                     <div className="right" key={index}>
-                      <span>{item.date}</span>
+                      <span>{item.date.slice(0, 10)}</span>
+                      <span>{item.date.slice(11, 16)}</span>
                       <span>{item.patient.name}</span>
                       <span>{item.professional.name}</span>
                     </div>

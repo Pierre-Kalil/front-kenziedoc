@@ -45,10 +45,10 @@ export const AppointmentsProvider = ({
       });
   };
 
-  const filterPatient = () => {
-    if (token && user.cpf) {
+  const filterPatient = (cpf: string) => {
+    if ((token && user.cpf) || cpf) {
       api
-        .get(`/appointment/patient/${user.cpf}`, {
+        .get(`/appointment/patient/${user.cpf || cpf}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
