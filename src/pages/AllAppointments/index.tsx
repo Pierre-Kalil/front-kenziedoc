@@ -37,14 +37,15 @@ export const AllAppointments = () => {
   };
 
   useEffect(() => {
-    filterPatient(cpf);
-    filterProfessional(councilNumber);
     filterTomorrow();
-    filterWaitList();
   }, []);
+
   const handleSearch = () => {
     filterPatient(cpf);
+    filterProfessional(councilNumber);
+    filterWaitList(councilNumber);
   };
+
   return (
     <>
       {!user.isAdm && !user.isProf ? (
@@ -57,7 +58,7 @@ export const AllAppointments = () => {
                     <span>Paciente: </span>
                     <span>Data:</span>
                     <span>Horário:</span>
-                    <span>Doutor(a):</span>
+                    <span>Médico(a):</span>
                     <span>Esp:</span>
                     <span>Status:</span>
                   </div>
@@ -176,7 +177,8 @@ export const AllAppointments = () => {
               />
               <button onClick={handleSearch}>Pesquisar</button>
             </BoxSearch>
-          ) : appointments[appointmentsToLoad] === "prof" ? (
+          ) : appointments[appointmentsToLoad] === "prof" ||
+            appointments[appointmentsToLoad] === "wait" ? (
             <BoxSearch>
               <input
                 type="text"
@@ -213,7 +215,7 @@ export const AllAppointments = () => {
                   <div className="left">
                     <span>Data:</span>
                     <span>Paciente:</span>
-                    <span>Doutor(a):</span>
+                    <span>Médico(a):</span>
                     <span>Status:</span>
                   </div>
                   <div className="right" key={index}>
@@ -232,7 +234,7 @@ export const AllAppointments = () => {
                   <div className="left">
                     <span>Data:</span>
                     <span>Paciente:</span>
-                    <span>Doutor(a):</span>
+                    <span>Médico(a):</span>
                     <span>CRM:</span>
                     <span>Status:</span>
                   </div>
@@ -255,7 +257,7 @@ export const AllAppointments = () => {
                       <span>Data:</span>
                       <span>Horário:</span>
                       <span>Paciente:</span>
-                      <span>Doutor(a):</span>
+                      <span>Médico(a):</span>
                     </div>
                     <div className="right" key={index}>
                       <span>{item.date.slice(0, 10)}</span>

@@ -10,7 +10,7 @@ export interface AppointmentsProviderProps {
   filterPatient: (cpf: string) => void;
   filterProfessional: (councilNumber: string) => void;
   filterTomorrow: () => void;
-  filterWaitList: () => void;
+  filterWaitList: (councilNumber: string) => void;
   appointmentPatient: AppointmentPatient[];
   appointmentProf: AppointmentProf[];
   tomorrow: Tomorrow[];

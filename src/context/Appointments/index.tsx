@@ -94,10 +94,10 @@ export const AppointmentsProvider = ({
     }
   };
 
-  const filterWaitList = () => {
-    if (token && user.council_number) {
+  const filterWaitList = (councilNumber: string) => {
+    if ((token && user.council_number) || councilNumber) {
       api
-        .get(`/appointment/wait_list/${user.council_number}`, {
+        .get(`/appointment/wait_list/${user.council_number || councilNumber}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
