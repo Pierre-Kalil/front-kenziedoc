@@ -45,10 +45,10 @@ export const AppointmentsProvider = ({
       });
   };
 
-  const filterPatient = () => {
-    if (token && user.cpf) {
+  const filterPatient = (cpf: string) => {
+    if ((token && user.cpf) || cpf) {
       api
-        .get(`/appointment/patient/${user.cpf}`, {
+        .get(`/appointment/patient/${user.cpf || cpf}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -60,14 +60,17 @@ export const AppointmentsProvider = ({
     }
   };
 
-  const filterProfessional = () => {
-    if (token && user.council_number) {
+  const filterProfessional = (councilNumber: string) => {
+    if ((token && user.council_number) || councilNumber) {
       api
-        .get(`/appointment/professional/${user.council_number}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .get(
+          `/appointment/professional/${user.council_number || councilNumber}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           setAppointmentProf(res.data);
         })
@@ -91,10 +94,10 @@ export const AppointmentsProvider = ({
     }
   };
 
-  const filterWaitList = () => {
-    if (token && user.council_number) {
+  const filterWaitList = (councilNumber: string) => {
+    if ((token && user.council_number) || councilNumber) {
       api
-        .get(`/appointment/wait_list/${user.council_number}`, {
+        .get(`/appointment/wait_list/${user.council_number || councilNumber}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -13,7 +13,7 @@ export const ContainerForm = styled.div`
   background: rgba(248, 248, 251, 1);
   border-radius: 5px 5px 0 0;
 
-  /* .header {
+  .test {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -27,13 +27,6 @@ export const ContainerForm = styled.div`
     img {
       width: 100px;
     }
-
-    svg {
-      width: 15px;
-      padding: 0;
-      margin: -60px -50px 0 -20px;
-      color: rgba(85, 110, 230, 1);
-    } */
   }
 
   form {
@@ -54,6 +47,11 @@ export const ContainerForm = styled.div`
     input {
       margin: 2px 0;
     }
+  }
+
+  a {
+    text-decoration: none;
+    color: rgba(85, 110, 230, 1);
   }
 `;
 
