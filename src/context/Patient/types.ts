@@ -17,7 +17,7 @@ export interface UserProps {
 }
 
 export interface PatientProviderData {
-  allPatient: [];
+  allPatient: UserProps[];
   createPatient: (data: PatientFormProps, navigate: NavigateFunction) => void;
   listAllPatients: () => void;
   updatePatient: (cpf: string, data: any) => void;
