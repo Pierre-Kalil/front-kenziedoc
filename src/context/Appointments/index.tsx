@@ -45,9 +45,8 @@ export const AppointmentsProvider = ({
       });
   };
 
-  //appointments patient
-  useEffect(() => {
-    if (token) {
+  const filterPatient = () => {
+    if (token && user.cpf) {
       api
         .get(`/appointment/patient/${user.cpf}`, {
           headers: {
@@ -59,11 +58,10 @@ export const AppointmentsProvider = ({
         })
         .catch((err) => console.log(err));
     }
-  }, [token]);
+  };
 
-  //appointment professional
-  useEffect(() => {
-    if (token) {
+  const filterProfessional = () => {
+    if (token && user.council_number) {
       api
         .get(`/appointment/professional/${user.council_number}`, {
           headers: {
@@ -75,27 +73,26 @@ export const AppointmentsProvider = ({
         })
         .catch((err) => console.log(err));
     }
-  }, [token]);
+  };
 
-  // //appointment tomorrow
-  // useEffect(() => {
-  //   if (token) {
-  //     api
-  //       .get(`/appointment/tomorrow`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       })
-  //       .then((res) => {
-  //         setTomorrow(res.data);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // }, [token]);
-
-  //appointment wait list professional
-  useEffect(() => {
+  const filterTomorrow = () => {
     if (token) {
+      api
+        .get(`/appointment/tomorrow`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          setTomorrow(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  const filterWaitList = () => {
+    if (token && user.council_number) {
       api
         .get(`/appointment/wait_list/${user.council_number}`, {
           headers: {
@@ -107,12 +104,16 @@ export const AppointmentsProvider = ({
         })
         .catch((err) => console.log(err));
     }
-  }, [token]);
+  };
 
   return (
     <AppointmentContext.Provider
       value={{
         createAppointments,
+        filterPatient,
+        filterProfessional,
+        filterTomorrow,
+        filterWaitList,
         appointmentPatient,
         appointmentProf,
         tomorrow,

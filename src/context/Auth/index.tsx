@@ -29,7 +29,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setUser(jwt_decode<Decoded>(token));
     }
   }, [token]);
-
   return (
     <AuthContext.Provider value={{ signin, token, user, setUser }}>
       {children}
