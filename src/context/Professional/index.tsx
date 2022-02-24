@@ -20,13 +20,14 @@ export const ProfessionalProvider = ({
   const CreateProfessional = async (data: ProfessionalFormProps) => {
     const { council_number, name, email, phone, specialty, address, password } =
       data;
+
     await api
       .post("/professional", {
         council_number: council_number,
         name: name,
         email: email,
         phone: phone,
-        speciality: specialty,
+        specialty: specialty,
         address: address,
         password: password,
       })
