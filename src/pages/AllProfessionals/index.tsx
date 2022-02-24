@@ -16,9 +16,11 @@ export const AllProfessionals = () => {
   const { setModalAppointment, modalAppointment } = useStateContext();
   const [filtered, setFiltered] = useState<ProfessionalProps[]>([]);
   const [search, setSearch] = useState("");
+  const [curProf, setCurProf] = useState("");
 
-  const handleModal = () => {
+  const handleModal = (crm: string) => {
     setModalAppointment(true);
+    setCurProf(crm!);
   };
 
   useEffect(() => {
@@ -30,7 +32,7 @@ export const AllProfessionals = () => {
       })
     );
   }, [search]);
-  console.log(allProfessional);
+
   return (
     <>
       <ContainerProfessionals>
@@ -40,7 +42,7 @@ export const AllProfessionals = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        {modalAppointment ? <FormAppointments /> : <></>}
+        {modalAppointment && <FormAppointments crm={curProf} />}
         <ListProfessionals>
           {filtered.length > 0
             ? filtered.map((item, index) => (
@@ -48,7 +50,9 @@ export const AllProfessionals = () => {
                   <span>{item.name}</span>
                   <span>{item.specialty}</span>
                   <span>{item.council_number}</span>
-                  <button onClick={handleModal}>Marcar consulta</button>
+                  <button onClick={() => handleModal(item.council_number!)}>
+                    Marcar consulta
+                  </button>
                 </CardProfessionals>
               ))
             : allProfessional.map((item, index) => (
@@ -56,7 +60,9 @@ export const AllProfessionals = () => {
                   <span>{item.name}</span>
                   <span>{item.specialty}</span>
                   <span>{item.council_number}</span>
-                  <button onClick={handleModal}>Marcar consulta</button>
+                  <button onClick={() => handleModal(item.council_number!)}>
+                    Marcar consulta
+                  </button>
                 </CardProfessionals>
               ))}
         </ListProfessionals>

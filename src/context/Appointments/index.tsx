@@ -30,9 +30,10 @@ export const AppointmentsProvider = ({
   const [tomorrow, setTomorrow] = useState<Tomorrow[]>([] as Tomorrow[]);
   const [waitList, setWaitList] = useState<WaitList[]>([] as WaitList[]);
 
-  const createAppointments = (newdata: AppointmentsFormProps) => {
+  const createAppointments = (data: AppointmentsFormProps) => {
+    data.finished = false;
     api
-      .post("/appointments", newdata, {
+      .post("/appointment", data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -41,7 +42,7 @@ export const AppointmentsProvider = ({
         toast.success("Consulta marcada com sucesso!");
       })
       .catch((err) => {
-        toast.success("Algo saiu errado. Tente novamente.");
+        toast.error("Algo saiu errado. Tente novamente.");
       });
   };
 
