@@ -9,12 +9,10 @@ import { Button, ContainerForm } from "./styles";
 import appointmentsImg from "../../assets/appointmentsImg.svg";
 import { FaRegWindowClose } from "react-icons/fa";
 import { useStateContext } from "../../context/States";
-import { useAuth } from "../../context/Auth";
 
-export const FormAppointments = () => {
+export const FormAppointments = ({ crm }: { crm: string | undefined }) => {
   const { createAppointments } = useAppointment();
   const { setModalAppointment, modalAppointment } = useStateContext();
-  const { user } = useAuth();
   const [date1, setDate] = useState("".replace("-", "/"));
 
   const {
@@ -32,8 +30,9 @@ export const FormAppointments = () => {
     const newdata = {
       professional: professional,
       patient: patient,
-      newdate: newdate,
+      date: newdate,
     };
+
     createAppointments(newdata);
     reset();
   };
@@ -47,7 +46,10 @@ export const FormAppointments = () => {
       <ContainerForm>
         <form onSubmit={handleSubmit(onSubmitData)}>
           <div className="header">
-            <FaRegWindowClose onClick={handleSchedule} />
+            <FaRegWindowClose
+              onClick={handleSchedule}
+              style={{ cursor: "pointer" }}
+            />
             <span>Marcar consulta</span>
             <img src={appointmentsImg} alt="medic and patient" />
           </div>
@@ -58,15 +60,16 @@ export const FormAppointments = () => {
               placeholder="CPF do paciente"
               register={register}
               name="patient"
-              error={errors.patient?.message}
+              error={errors.patient?.message || " "}
             />
             <Input
               colorInput
               type="text"
               placeholder="CRM do médico"
+              defaultValue={crm || ""}
               register={register}
               name="professional"
-              error={errors.professional?.message}
+              error={errors.professional?.message || " "}
             />
             <Input
               colorInput
@@ -74,7 +77,7 @@ export const FormAppointments = () => {
               placeholder="Data da consulta"
               register={register}
               name="date"
-              error={errors.date?.message}
+              error={errors.date?.message || " "}
               onChange={(e) => setDate(e.target.value)}
             />
             <Input
@@ -83,8 +86,8 @@ export const FormAppointments = () => {
               placeholder="Hora da consulta"
               register={register}
               name="time"
-              error={errors.time?.message}
-              step="2"
+              error={errors.time?.message || " "}
+              step="1800"
               // onChange={(e) => setDate(e.target.value)}
             />
             <Button type="submit">Agendar</Button>
