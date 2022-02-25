@@ -1,18 +1,30 @@
-import { useNavigate } from "react-router-dom";
-import { FormLogin } from "../../components/formLogin";
 import { useAuth } from "../../context/Auth";
-import { ContainerHome } from "./style";
+import { Container, ContainerHome } from "./style";
 
 export const Home = () => {
-  const navigate = useNavigate();
   const { user } = useAuth();
+
   return (
-    <ContainerHome>
-      <h1>Bem vindo(a)</h1>
-      <div>{user.name}</div>
-      <div>{user.council_number}</div>
-      <div>{user.cpf}</div>
-      <div>{user.email}</div>
-    </ContainerHome>
+    <>
+      <ContainerHome>
+        {user.isProf ? (
+          <>
+            <Container>
+              <h1>Bem-vindo(a), Dr(a). {user.name.split(" ")[0]}!</h1>
+              <p>Email: {user.email}</p>
+              <p>CRM: {user.council_number}</p>
+            </Container>
+          </>
+        ) : (
+          <>
+            <Container>
+              <h1>Bem-vindo(a), {user.name.split(" ")[0]}!</h1>
+              <p>Email: {user.email}</p>
+              <p>CPF: {user.cpf}</p>
+            </Container>
+          </>
+        )}
+      </ContainerHome>
+    </>
   );
 };

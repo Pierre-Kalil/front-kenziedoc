@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ProfessionalFormProps } from "../../components/formProfessionl/types";
 import api from "../../services/api";
 import { useAuth } from "../Auth";
+import { useStateContext } from "../States";
 import { ProfessionalDataProps, ProfessionalProviderProps } from "./types";
 
 const ProfessionalContext = createContext<ProfessionalDataProps>(
@@ -88,6 +89,7 @@ export const ProfessionalProvider = ({
       .delete(`/professional/${identify}`)
       .then((res) => {
         toast.success("Profissional deletado com sucesso!");
+        navigate("/login");
       })
       .catch((err) => toast.error("Ocorreu um erro ao deletar o profissional"));
   };
