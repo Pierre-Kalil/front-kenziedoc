@@ -56,7 +56,6 @@ export const FormAppointments = () => {
               colorInput
               type="text"
               placeholder="CPF do paciente"
-              value={user?.cpf}
               register={register}
               name="patient"
               error={errors.patient?.message}
