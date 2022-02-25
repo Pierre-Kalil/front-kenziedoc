@@ -104,7 +104,7 @@ export const CardAppointments = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
     align-items: flex-end;
-    width: 25%;
+    width: 35%;
     height: 80%;
   }
   .right {

@@ -16,11 +16,9 @@ export const AllProfessionals = () => {
   const { setModalAppointment, modalAppointment } = useStateContext();
   const [filtered, setFiltered] = useState<ProfessionalProps[]>([]);
   const [search, setSearch] = useState("");
-  const [curProf, setCurProf] = useState("");
 
-  const handleModal = (crm: string) => {
+  const handleModal = () => {
     setModalAppointment(true);
-    setCurProf(crm!);
   };
 
   useEffect(() => {
@@ -32,17 +30,16 @@ export const AllProfessionals = () => {
       })
     );
   }, [search]);
-
   return (
     <>
       <ContainerProfessionals>
         <input
           type="text"
-          placeholder="CRM do Médico"
+          placeholder="Especialidade do Médico"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        {modalAppointment && <FormAppointments crm={curProf} />}
+        {modalAppointment ? <FormAppointments /> : <></>}
         <ListProfessionals>
           {filtered.length > 0
             ? filtered.map((item, index) => (
@@ -50,9 +47,7 @@ export const AllProfessionals = () => {
                   <span>{item.name}</span>
                   <span>{item.specialty}</span>
                   <span>{item.council_number}</span>
-                  <button onClick={() => handleModal(item.council_number!)}>
-                    Marcar consulta
-                  </button>
+                  <button onClick={handleModal}>Marcar consulta</button>
                 </CardProfessionals>
               ))
             : allProfessional.map((item, index) => (
@@ -60,9 +55,7 @@ export const AllProfessionals = () => {
                   <span>{item.name}</span>
                   <span>{item.specialty}</span>
                   <span>{item.council_number}</span>
-                  <button onClick={() => handleModal(item.council_number!)}>
-                    Marcar consulta
-                  </button>
+                  <button onClick={handleModal}>Marcar consulta</button>
                 </CardProfessionals>
               ))}
         </ListProfessionals>

@@ -2,9 +2,13 @@ import styled from "styled-components";
 
 export const ContainerHome = styled.div`
   display: flex;
+<<<<<<< HEAD
+  flex-direction: column;
+=======
   /* flex-direction: column; */
   flex-direction: row;
   justify-content: space-around;
+>>>>>>> 62c21112207b8c8e5ab95ca0d6129d1bf911abfb
   align-items: center;
   width: 95%;
   height: 95vh;
