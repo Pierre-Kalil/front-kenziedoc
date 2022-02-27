@@ -21,8 +21,7 @@ export const FormProfessional = () => {
 
   const onSubmitData = (data: ProfessionalFormProps) => {
     CreateProfessional(data);
-    // reset();
-    console.log(data);
+    reset();
   };
 
   return (

@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   background-color: #f7f5f5;
   width: 150px;
   height: 180px;
-  padding: 10px 15px;
+  padding: 5px 5px;
   text-align: center;
   border-radius: 10px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
@@ -30,6 +34,11 @@ export const Container = styled.div`
       color: #4ebef2;
       background-color: white;
       border: 1px solid #4ebef2;
+    }
+    :active {
+      background: rgb(68, 196, 249, 100%);
+      color: #4ebef2;
+      transition: 0.1s;
     }
   }
 `;

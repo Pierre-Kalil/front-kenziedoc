@@ -88,7 +88,6 @@ export const AppointmentsProvider = ({
           },
         })
         .then((res) => {
-          console.log(res.data);
           setTomorrow(res.data);
         })
         .catch((err) => console.log(err));

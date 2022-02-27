@@ -1,14 +1,11 @@
 import { useProfessional } from "../../context/Professional";
-import {
-  CardProfessionals,
-  ContainerProfessionals,
-  ListProfessionals,
-} from "./style";
+import { ContainerProfessionals, ListProfessionals } from "./style";
 import { FormAppointments } from "../../components/formAppointments";
 import { useEffect, useState } from "react";
 import { useStateContext } from "../../context/States";
 import { UserProps } from "../../context/Patient/types";
 import { ProfessionalProps } from "../../context/Professional/types";
+import { Card } from "../../components/card";
 
 export const AllProfessionals = () => {
   const { allProfessional, ListAllProfessional, GetBySpecialty } =
@@ -16,8 +13,10 @@ export const AllProfessionals = () => {
   const { setModalAppointment, modalAppointment } = useStateContext();
   const [filtered, setFiltered] = useState<ProfessionalProps[]>([]);
   const [search, setSearch] = useState("");
+  const [crm, setCrm] = useState<string | undefined>("");
 
-  const handleModal = () => {
+  const handleModal = (crm: string | undefined) => {
+    setCrm(crm);
     setModalAppointment(true);
   };
 
@@ -39,24 +38,18 @@ export const AllProfessionals = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        {modalAppointment ? <FormAppointments /> : <></>}
+        {modalAppointment ? <FormAppointments crm={crm} /> : <></>}
         <ListProfessionals>
           {filtered.length > 0
             ? filtered.map((item, index) => (
-                <CardProfessionals key={index}>
-                  <span>{item.name}</span>
-                  <span>{item.specialty}</span>
-                  <span>{item.council_number}</span>
-                  <button onClick={handleModal}>Marcar consulta</button>
-                </CardProfessionals>
+                <Card
+                  key={index}
+                  person={item}
+                  callback={() => handleModal(item.council_number)}
+                />
               ))
             : allProfessional.map((item, index) => (
-                <CardProfessionals key={index}>
-                  <span>{item.name}</span>
-                  <span>{item.specialty}</span>
-                  <span>{item.council_number}</span>
-                  <button onClick={handleModal}>Marcar consulta</button>
-                </CardProfessionals>
+                <Card key={index} person={item} />
               ))}
         </ListProfessionals>
       </ContainerProfessionals>

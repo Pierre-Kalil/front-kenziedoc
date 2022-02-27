@@ -51,7 +51,6 @@ export const PatientProvider = ({ children }: PatientProviderProps) => {
     await api
       .patch(`/patient/${cpf}`, data)
       .then((res) => {
-        console.log(res);
         toast.success("Paciente atualizado com sucesso!");
       })
       .catch((err) => console.log(err));

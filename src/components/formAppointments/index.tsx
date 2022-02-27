@@ -9,8 +9,10 @@ import { Button, ContainerForm } from "./styles";
 import appointmentsImg from "../../assets/appointmentsImg.svg";
 import { FaRegWindowClose } from "react-icons/fa";
 import { useStateContext } from "../../context/States";
+import { useAuth } from "../../context/Auth";
 
 export const FormAppointments = ({ crm }: { crm: string | undefined }) => {
+  const { user } = useAuth();
   const { createAppointments } = useAppointment();
   const { setModalAppointment, modalAppointment } = useStateContext();
   const [date1, setDate] = useState("".replace("-", "/"));
@@ -34,6 +36,7 @@ export const FormAppointments = ({ crm }: { crm: string | undefined }) => {
     };
 
     createAppointments(newdata);
+    setModalAppointment(false);
     reset();
   };
 
@@ -58,6 +61,7 @@ export const FormAppointments = ({ crm }: { crm: string | undefined }) => {
               colorInput
               type="text"
               placeholder="CPF do paciente"
+              value={user?.cpf}
               register={register}
               name="patient"
               error={errors.patient?.message || " "}

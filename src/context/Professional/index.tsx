@@ -64,7 +64,6 @@ export const ProfessionalProvider = ({
     await api
       .patch(`/professional/${identify}`, data)
       .then((res) => {
-        console.log(res);
         toast.success("Profissional atualizado com sucesso!");
       })
       .catch((err) =>
@@ -78,7 +77,6 @@ export const ProfessionalProvider = ({
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        console.log(res);
         setUser(res.data);
       })
       .catch((err) => console.log(err));

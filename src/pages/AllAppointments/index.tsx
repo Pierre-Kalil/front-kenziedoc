@@ -2,33 +2,28 @@ import { useEffect, useState } from "react";
 import { useAppointment } from "../../context/Appointments";
 import { useAuth } from "../../context/Auth";
 import { useStateContext } from "../../context/States";
-import {
-  BoxAppointments,
-  CardAppointments,
-  ContainerAppointments,
-  HeaderProfAdmin,
-  Ul,
-  Li,
-  BoxSearch,
-  Menuhamburguer,
-} from "./style";
-import { FiAlignJustify, FiX } from "react-icons/fi";
+import { CardProf } from "../../components/cardsAppointmnts/prof";
+import { CardWait } from "../../components/cardsAppointmnts/wait";
+import { CardPatient } from "../../components/cardsAppointmnts/patient";
+import { CardTomorrow } from "../../components/cardsAppointmnts/tomorrow";
+import { HeaderAdminProf } from "../../components/headerAdminProf";
+import { BoxAppointments, ContainerAppointments, BoxSearch } from "./style";
 
 export const AllAppointments = () => {
   const { user } = useAuth();
-  const { filterPatient, filterProfessional, filterTomorrow, filterWaitList } =
-    useAppointment();
   const {
-    appointmentsToLoad,
-    setAppointmentsToLoad,
-    profAppointment,
-    setProfAppointment,
-  } = useStateContext();
-  const { appointmentPatient, appointmentProf, tomorrow, waitList } =
-    useAppointment();
-  const [cpf, setCpf] = useState("");
+    filterPatient,
+    filterProfessional,
+    filterTomorrow,
+    filterWaitList,
+    appointmentPatient,
+    appointmentProf,
+    tomorrow,
+    waitList,
+  } = useAppointment();
+  const { appointmentsToLoad, profAppointment } = useStateContext();
   const [councilNumber, setCouncilNumber] = useState("");
-  const [MenuDrop, setMenuDrop] = useState(false);
+  const [cpf, setCpf] = useState("");
 
   const appointments: {
     [key: string]: string;
@@ -38,9 +33,12 @@ export const AllAppointments = () => {
     tomorrow: "tomorrow",
     wait: "wait",
   };
-  console.log(appointmentProf, "++++++++++++");
+
   useEffect(() => {
     filterTomorrow();
+    filterPatient(cpf);
+    filterWaitList(councilNumber);
+    filterProfessional(councilNumber);
   }, []);
 
   const handleSearch = () => {
@@ -48,40 +46,15 @@ export const AllAppointments = () => {
     filterProfessional(councilNumber);
     filterWaitList(councilNumber);
   };
-
-  const OpenHamburguer = () => {
-    setMenuDrop(true);
-  };
-
-  const CloseHamburguer = () => {
-    setMenuDrop(false);
-  };
-
   return (
     <>
       {!user.isAdm && !user.isProf ? (
         <ContainerAppointments>
+          <h1>Minhas Consultas</h1>
           <BoxAppointments>
             {appointmentPatient &&
               appointmentPatient.map((item, index) => (
-                <CardAppointments key={index}>
-                  <div className="left">
-                    <span>Paciente: </span>
-                    <span>Data:</span>
-                    <span>Horário:</span>
-                    <span>Médico(a):</span>
-                    <span>Esp:</span>
-                    <span>Status:</span>
-                  </div>
-                  <div className="right">
-                    <span>{item?.patient_name}</span>
-                    <span>{item?.date.slice(0, 10)}</span>
-                    <span>{item.date.slice(11, 16)}</span>
-                    <span>{item?.professional.name}</span>
-                    <span>{item?.professional.specialty}</span>
-                    <span>{item?.finished ? "Finalizada" : "Ativo"}</span>
-                  </div>
-                </CardAppointments>
+                <CardPatient key={index} patient={item} />
               ))}
           </BoxAppointments>
         </ContainerAppointments>
@@ -91,72 +64,12 @@ export const AllAppointments = () => {
 
       {user.isProf ? (
         <ContainerAppointments>
-          {MenuDrop ? (
-            <FiX className="close" onClick={CloseHamburguer} />
-          ) : (
-            <FiAlignJustify onClick={OpenHamburguer} />
-          )}
-          {MenuDrop ? (
-            <Menuhamburguer className={MenuDrop ? "menu active" : "menu"}>
-              <ul>
-                <li>
-                  <button
-                    onClick={() => setAppointmentsToLoad("professionals")}
-                  >
-                    <button
-                      className="secundary"
-                      onClick={() => setMenuDrop(false)}
-                    >
-                      Minhas consultas
-                    </button>
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => setAppointmentsToLoad("wait")}>
-                    <button
-                      className="secundary"
-                      onClick={() => setMenuDrop(false)}
-                    >
-                      lista de espera
-                    </button>
-                  </button>
-                </li>
-              </ul>
-            </Menuhamburguer>
-          ) : (
-            <></>
-          )}
-          <HeaderProfAdmin>
-            <Ul>
-              <Li>
-                <button onClick={() => setProfAppointment(true)}>
-                  Minhas consultas
-                </button>
-              </Li>
-              <Li>
-                <button onClick={() => setProfAppointment(false)}>
-                  Lista de espera
-                </button>
-              </Li>
-            </Ul>
-          </HeaderProfAdmin>
+          <HeaderAdminProf />
           {profAppointment ? (
             <BoxAppointments>
               {waitList.length > 0 ? (
                 waitList.map((item, index) => (
-                  <CardAppointments key={index}>
-                    <span>CRM:</span>
-                    <div className="left">
-                      <span>Espera:</span>
-                      <span>Consulta:</span>
-                      <span>Mensagem:</span>
-                    </div>
-                    <div className="right">
-                      <span>{item.size}</span>
-                      <span>{item.appointments}</span>
-                      <span>{item.message}</span>
-                    </div>
-                  </CardAppointments>
+                  <CardWait key={index} wait={item} />
                 ))
               ) : (
                 <></>
@@ -166,25 +79,7 @@ export const AllAppointments = () => {
             <BoxAppointments>
               {appointmentProf &&
                 appointmentProf.map((item, index) => (
-                  <CardAppointments key={index}>
-                    <div className="left">
-                      <span>Data:</span>
-                      <span>Nome: </span>
-                      <span>Idade:</span>
-                      <span>Sexo:</span>
-                      <span>Plano:</span>
-                      <span>Status</span>
-                    </div>
-                    <div className="right">
-                      <span>{item.date}</span>
-                      <span>{item.patient.name}</span>
-                      <span>{item.patient.age}</span>
-                      <span>{item.patient.sex}</span>
-                      <span>{item.patient.healt_plan}</span>
-                      <span>{item?.finished ? "Finalizada" : "Ativo"}</span>
-                    </div>
-                    {/* <button>Finalizar</button> */}
-                  </CardAppointments>
+                  <CardProf key={index} prof={item} />
                 ))}
             </BoxAppointments>
           )}
@@ -194,85 +89,7 @@ export const AllAppointments = () => {
       )}
       {user.isAdm ? (
         <ContainerAppointments>
-          {MenuDrop ? (
-            <FiX className="close" onClick={CloseHamburguer} />
-          ) : (
-            <FiAlignJustify onClick={OpenHamburguer} />
-          )}
-          {MenuDrop ? (
-            <Menuhamburguer className={MenuDrop ? "menu active" : "menu"}>
-              <ul>
-                <li>
-                  <button onClick={() => setAppointmentsToLoad("patients")}>
-                    <button
-                      className="secundary"
-                      onClick={() => setMenuDrop(false)}
-                    >
-                      Consultas paciente
-                    </button>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setAppointmentsToLoad("professionals")}
-                  >
-                    <button
-                      className="secundary"
-                      onClick={() => setMenuDrop(false)}
-                    >
-                      Consultas médico
-                    </button>
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => setAppointmentsToLoad("wait")}>
-                    <button
-                      className="secundary"
-                      onClick={() => setMenuDrop(false)}
-                    >
-                      lista de espera médico
-                    </button>
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => setAppointmentsToLoad("tomorrow")}>
-                    <button
-                      className="secundary"
-                      onClick={() => setMenuDrop(false)}
-                    >
-                      Consultas de amanhã
-                    </button>
-                  </button>
-                </li>
-              </ul>
-            </Menuhamburguer>
-          ) : (
-            <></>
-          )}
-          <HeaderProfAdmin>
-            <Ul>
-              <Li>
-                <button onClick={() => setAppointmentsToLoad("patients")}>
-                  Consultas paciente
-                </button>
-              </Li>
-              <Li>
-                <button onClick={() => setAppointmentsToLoad("professionals")}>
-                  Consultas médico
-                </button>
-              </Li>
-              <Li>
-                <button onClick={() => setAppointmentsToLoad("wait")}>
-                  Lista de espera médico
-                </button>
-              </Li>
-              <Li>
-                <button onClick={() => setAppointmentsToLoad("tomorrow")}>
-                  Consultas de amanhã
-                </button>
-              </Li>
-            </Ul>
-          </HeaderProfAdmin>
+          <HeaderAdminProf />
           {appointments[appointmentsToLoad] === "patients" ? (
             <BoxSearch>
               <input
@@ -301,18 +118,7 @@ export const AllAppointments = () => {
             <BoxAppointments>
               {waitList.length > 0
                 ? waitList.map((item, index) => (
-                    <CardAppointments key={index}>
-                      <div className="left">
-                        <span>Espera:</span>
-                        <span>Consulta:</span>
-                        <span>Mensagem:</span>
-                      </div>
-                      <div className="right">
-                        <span>{item.appointments[0]}</span>
-                        <span>{item.appointments[1]}</span>
-                        <span>{item.message}</span>
-                      </div>
-                    </CardAppointments>
+                    <CardWait key={index} wait={item} />
                   ))
                 : ""}
             </BoxAppointments>
@@ -320,65 +126,22 @@ export const AllAppointments = () => {
             <BoxAppointments>
               {appointmentProf &&
                 appointmentProf.map((item, index) => (
-                  <CardAppointments key={index}>
-                    <div className="left">
-                      <span>Data:</span>
-                      <span>Paciente:</span>
-                      <span>Médico(a):</span>
-                      <span>Status:</span>
-                    </div>
-                    <div className="right">
-                      <span>{item.date}</span>
-                      <span>{item.patient.name}</span>
-                      <span>{item.professional_name}</span>
-                      <span>{item?.finished ? "Finalizada" : "Ativo"}</span>
-                    </div>
-                  </CardAppointments>
+                  <CardProf key={index} prof={item} />
                 ))}
             </BoxAppointments>
           ) : appointments[appointmentsToLoad] === "patients" ? (
             <BoxAppointments>
               {appointmentPatient &&
                 appointmentPatient.map((item, index) => (
-                  <CardAppointments key={index}>
-                    <div className="left">
-                      <span>Data:</span>
-                      <span>Horário:</span>
-                      <span>Paciente:</span>
-                      <span>Médico(a):</span>
-                      <span>CRM:</span>
-                      <span>Status:</span>
-                    </div>
-                    <div className="right">
-                      <span>{item.date.slice(0, 10)}</span>
-                      <span>{item.date.slice(11, 16)}</span>
-                      <span>{item.patient_name}</span>
-                      <span>{item.professional.name}</span>
-                      <span>{item.professional.council_number}</span>
-                      <span>{item?.finished ? "Finalizada" : "Ativo"}</span>
-                    </div>
-                  </CardAppointments>
+                  <CardPatient key={index} patient={item} />
                 ))}
             </BoxAppointments>
           ) : (
             <BoxAppointments>
               {tomorrow &&
-                tomorrow.map((item, index) => (
-                  <CardAppointments key={index}>
-                    <div className="left">
-                      <span>Data:</span>
-                      <span>Horário:</span>
-                      <span>Paciente:</span>
-                      <span>Médico(a):</span>
-                    </div>
-                    <div className="right">
-                      <span>{item.date.slice(0, 10)}</span>
-                      <span>{item.date.slice(11, 16)}</span>
-                      <span>{item.patient.name}</span>
-                      <span>{item.professional.name}</span>
-                    </div>
-                  </CardAppointments>
-                ))}
+                tomorrow.map((tomo, index) => {
+                  return <CardTomorrow key={index} tomorrow={tomo} />;
+                })}
             </BoxAppointments>
           )}
         </ContainerAppointments>
