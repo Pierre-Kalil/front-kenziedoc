@@ -4,6 +4,7 @@ import api from "../../services/api";
 import { AuthProviderProps, Decoded, AuthProviderData } from "./types";
 import { LoginProps } from "../../components/formLogin/types";
 import jwt_decode from "jwt-decode";
+import toast from "react-hot-toast";
 
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
 
@@ -21,7 +22,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setToken(res.data.token);
         navigate("/dashboard");
       })
-      .catch((err) => console.log(err, "erro"));
+      .catch((_) => toast.error("Algo saiu errado. Tente novamente."));
   };
 
   useEffect(() => {

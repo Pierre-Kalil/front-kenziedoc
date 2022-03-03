@@ -8,6 +8,7 @@ import { CardPatient } from "../../components/cardsAppointmnts/patient";
 import { CardTomorrow } from "../../components/cardsAppointmnts/tomorrow";
 import { HeaderAdminProf } from "../../components/headerAdminProf";
 import { BoxAppointments, ContainerAppointments, BoxSearch } from "./style";
+import { FormPrescription } from "../../components/formPrescription";
 
 export const AllAppointments = () => {
   const { user } = useAuth();
@@ -21,8 +22,10 @@ export const AllAppointments = () => {
     tomorrow,
     waitList,
   } = useAppointment();
-  const { appointmentsToLoad, profAppointment } = useStateContext();
+  const { appointmentsToLoad, profAppointment, modalPrescription } =
+    useStateContext();
   const [councilNumber, setCouncilNumber] = useState("");
+
   const [cpf, setCpf] = useState("");
 
   const appointments: {
@@ -43,8 +46,8 @@ export const AllAppointments = () => {
 
   const handleSearch = () => {
     filterPatient(cpf);
-    filterProfessional(councilNumber);
     filterWaitList(councilNumber);
+    filterProfessional(councilNumber);
   };
   return (
     <>
@@ -77,6 +80,7 @@ export const AllAppointments = () => {
             </BoxAppointments>
           ) : (
             <BoxAppointments>
+              {modalPrescription ? <FormPrescription /> : <></>}
               {appointmentProf &&
                 appointmentProf.map((item, index) => (
                   <CardProf key={index} prof={item} />

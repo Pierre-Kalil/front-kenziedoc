@@ -8,6 +8,7 @@ export const StatesProvider = ({ children }: ProviderStates) => {
   const [pageToLoad, setPageToLoad] = useState("home");
   const [appointmentsToLoad, setAppointmentsToLoad] = useState("tomorrow");
   const [profAppointment, setProfAppointment] = useState<boolean>(false);
+  const [modalPrescription, setModalPrescription] = useState<boolean>(false);
 
   return (
     <StatesContext.Provider
@@ -20,6 +21,8 @@ export const StatesProvider = ({ children }: ProviderStates) => {
         appointmentsToLoad,
         setProfAppointment,
         profAppointment,
+        setModalPrescription,
+        modalPrescription,
       }}
     >
       {children}

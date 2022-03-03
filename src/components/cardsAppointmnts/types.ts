@@ -1,3 +1,5 @@
+import { Dispatch } from "react";
+
 export interface IAppointments {
   patient?: {
     id?: string;
@@ -46,15 +48,6 @@ export interface IAppointments {
       patient: { name: string; phone: string; email: string }
     ];
   };
-}
-
-export interface WaitList {
-  message: string;
-  size: number;
-  professional_email: string;
-  appointments: [
-    id: string,
-    date: string,
-    patient: { name: string; phone: string; email: string }
-  ];
+  modal?: boolean;
+  setModal?: (value: React.SetStateAction<boolean>) => void | undefined;
 }

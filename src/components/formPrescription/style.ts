@@ -7,7 +7,7 @@ export const ContainerForm = styled.div`
   align-items: center;
 
   width: 350px;
-  height: 600px;
+  height: 300px;
 
   background: rgba(248, 248, 251, 1);
   border-radius: 5px;
@@ -25,6 +25,16 @@ export const ContainerForm = styled.div`
 
     img {
       width: 100px;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      /* margin: -60px -50px 0 -20px; */
+
+      border: none;
+      cursor: pointer;
     }
   }
 
@@ -45,12 +55,10 @@ export const ContainerForm = styled.div`
     justify-content: space-evenly;
     input {
       margin: 2px 0;
+      height: 80px;
+      width: 100%;
+      text-align: center;
     }
-  }
-
-  a {
-    text-decoration: none;
-    color: rgba(85, 110, 230, 1);
   }
 `;
 

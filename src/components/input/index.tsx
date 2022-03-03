@@ -13,6 +13,8 @@ interface FormProps {
   onChange?: (e: any) => void;
   step?: string;
   defaultValue?: string;
+  rows?: string;
+  cols?: string;
 }
 
 export const Input = ({
@@ -26,6 +28,8 @@ export const Input = ({
   onChange,
   step,
   defaultValue,
+  rows,
+  cols,
   ...rest
 }: FormProps) => {
   return (
@@ -38,6 +42,8 @@ export const Input = ({
           onChange={onChange}
           step={step}
           defaultValue={defaultValue}
+          rows={rows}
+          cols={cols}
           {...rest}
         />
       </InputBox>

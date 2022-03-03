@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import api from "../../services/api";
 import {
   AppointmentPatient,
@@ -9,8 +9,9 @@ import {
   WaitList,
 } from "./types";
 import toast from "react-hot-toast";
-import { AppointmentsFormProps } from "../../components/formAppointments/types";
 import { useAuth } from "../Auth";
+import { AppointmentsFormProps } from "../../components/formAppointments/types";
+import { PrescriptionFormProps } from "../../components/formPrescription/types";
 
 const AppointmentContext = createContext<AppointmentsProviderProps>(
   {} as AppointmentsProviderProps
@@ -42,6 +43,30 @@ export const AppointmentsProvider = ({
         toast.success("Consulta marcada com sucesso!");
       })
       .catch((err) => {
+        toast.error("Algo saiu errado. Tente novamente.");
+      });
+  };
+
+  const updateAppointments = (data: PrescriptionFormProps) => {
+    console.log(data);
+    api
+      .patch(
+        "/appointment",
+        {
+          prescription: data.prescription,
+          finished: true,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((_) => {
+        toast.success("Consulta marcada com sucesso!");
+      })
+      .catch((err) => {
+        console.log(err);
         toast.error("Algo saiu errado. Tente novamente.");
       });
   };
@@ -113,6 +138,7 @@ export const AppointmentsProvider = ({
     <AppointmentContext.Provider
       value={{
         createAppointments,
+        updateAppointments,
         filterPatient,
         filterProfessional,
         filterTomorrow,

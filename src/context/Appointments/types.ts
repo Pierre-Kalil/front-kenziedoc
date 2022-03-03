@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { AppointmentsFormProps } from "../../components/formAppointments/types";
+import { PrescriptionFormProps } from "../../components/formPrescription/types";
 
 export interface AppointmentsContextProps {
   children: ReactNode;
@@ -7,6 +8,7 @@ export interface AppointmentsContextProps {
 
 export interface AppointmentsProviderProps {
   createAppointments: (newdata: AppointmentsFormProps) => void;
+  updateAppointments: (data: PrescriptionFormProps) => void;
   filterPatient: (cpf: string) => void;
   filterProfessional: (councilNumber: string) => void;
   filterTomorrow: () => void;

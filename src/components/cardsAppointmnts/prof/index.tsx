@@ -1,8 +1,17 @@
+import { useStateContext } from "../../../context/States";
 import { CardAppointmentNew } from "../style";
 import { IAppointments } from "../types";
 
 export const CardProf = (props: IAppointments) => {
   const appo = props.prof;
+  const { modalPrescription, setModalPrescription } = useStateContext();
+
+  const handleFinishAndModal = () => {
+    if (modalPrescription) {
+      setModalPrescription(false);
+    }
+    setModalPrescription(true);
+  };
   return (
     <CardAppointmentNew>
       <div className="left">
@@ -19,7 +28,7 @@ export const CardProf = (props: IAppointments) => {
         <span>{appo?.professional_name}</span>
         <span>{appo?.finished ? "Finalizada" : "Ativo"}</span>
       </div>
-      <button>Finalizar</button>
+      <button onClick={handleFinishAndModal}>Finalizar</button>
     </CardAppointmentNew>
   );
 };

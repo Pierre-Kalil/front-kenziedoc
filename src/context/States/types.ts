@@ -13,4 +13,6 @@ export interface ContextStates {
   appointmentsToLoad: string;
   setProfAppointment: Dispatch<React.SetStateAction<boolean>>;
   profAppointment: boolean;
+  setModalPrescription: Dispatch<React.SetStateAction<boolean>>;
+  modalPrescription: boolean;
 }
