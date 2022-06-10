@@ -8,7 +8,7 @@ export const Logout = () => {
   const handleLogout = () => {
     localStorage.clear();
     setPageToLoad("Home");
-    navigate("/login");
+    navigate("/");
   };
 
   return (
